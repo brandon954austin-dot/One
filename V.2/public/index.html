@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CareBridge Voice Trainer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>CareBridge Voice Trainer</h1>
+    <!-- Diagnostic info about the current model, voice and key presence -->
+    <p id="diag" aria-live="polite"></p>
+  </header>
+
+  <main>
+    <!-- Session control panel -->
+    <section class="controls" aria-labelledby="controlsLabel">
+      <h2 id="controlsLabel">Session Controls</h2>
+      <form class="grid" onsubmit="return false;">
+        <div class="field">
+          <label for="scenario">Scenario</label>
+          <select id="scenario" name="scenario">
+            <option value="budget">Budget / Price</option>
+            <option value="network">Network / Doctor</option>
+            <option value="rx">Prescriptions / Formulary</option>
+            <option value="delay">Delay / Spouse</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="agentName">Agent Name (optional)</label>
+          <input id="agentName" name="agentName" type="text" placeholder="Your name" />
+        </div>
+        <div class="field">
+          <label for="speechRate">Client Speaking Rate</label>
+          <select id="speechRate" name="speechRate">
+            <option value="normal">Normal</option>
+            <option value="slow">Slow</option>
+            <option value="fast">Fast</option>
+          </select>
+        </div>
+        <!-- Buttons group: each button is labelled by its text -->
+        <div class="buttons">
+          <button id="btnStart" type="button">Start</button>
+          <button id="btnStop" type="button">Stop</button>
+          <button id="btnDownload" type="button">Download</button>
+        </div>
+      </form>
+      <div class="status-row">
+        <span id="status" aria-live="polite">Idle.</span>
+        <span>Duration: <strong id="duration">00:00</strong></span>
+      </div>
+    </section>
+
+    <!-- Transcript and scorecard panes -->
+    <section class="panes">
+      <div class="pane">
+        <h2>Transcript</h2>
+        <div id="transcript" role="log" aria-live="polite" aria-label="Transcript log"></div>
+      </div>
+      <div class="pane" role="group" aria-labelledby="scorecardLabel" id="scorecard">
+        <h2 id="scorecardLabel">Scorecard</h2>
+        <dl class="scores">
+          <div class="row"><dt>Discovery</dt><dd id="scoreDiscovery">0</dd></div>
+          <div class="row"><dt>Objections</dt><dd id="scoreObjections">0</dd></div>
+          <div class="row"><dt>Clarity</dt><dd id="scoreClarity">0</dd></div>
+          <div class="row"><dt>Close</dt><dd id="scoreClose">0</dd></div>
+        </dl>
+        <div class="notes-block">
+          <h3>Coaching Notes</h3>
+          <p id="coachNotes"></p>
+          <h3>Next Step</h3>
+          <p id="nextStep"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Use for training only. Do not include PHI/PII. Allow microphone when prompted.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
