@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="container">
+    <div class="prose">
+      <p style="margin-bottom: 0.6rem;"><a href="{{ blog.url }}">← All resources</a></p>
+      <h1>{{ article.title }}</h1>
+      <p class="article-meta">Published {{ article.published_at | date: '%B %-d, %Y' }} · {{ shop.name }}</p>
+      {{ article.content }}
+    </div>
+  </div>
+</section>
+
+<section class="section section--navy">
+  <div class="container center">
+    <h2>Reading is free. So is the first call.</h2>
+    <p class="lede" style="margin-inline: auto;">If this guide raised questions about your own operation, a fifteen-minute consultation will answer them specifically.</p>
+    {%- if settings.calendly_url != blank -%}
+      <div class="btn-row" style="justify-content: center;">
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>

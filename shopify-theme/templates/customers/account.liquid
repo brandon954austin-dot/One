@@ -1,0 +1,40 @@
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Client portal</span>
+    <h1>My account</h1>
+    <p class="lede">Welcome back{% if customer.first_name %}, {{ customer.first_name }}{% endif %}. <a href="{{ routes.account_logout_url }}">Log out</a></p>
+
+    <h2 style="margin-top: 2rem;">Order history</h2>
+    {%- if customer.orders.size == 0 -%}
+      <p>No orders yet. <a href="{{ routes.all_products_collection_url }}">Browse programs →</a></p>
+    {%- else -%}
+      <table class="cart-table">
+        <thead>
+          <tr><th>Order</th><th>Date</th><th>Status</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          {%- for order in customer.orders -%}
+            <tr>
+              <td><a href="{{ order.customer_url }}" class="cart-item__title">{{ order.name }}</a></td>
+              <td>{{ order.created_at | date: '%B %-d, %Y' }}</td>
+              <td>{{ order.financial_status_label }} / {{ order.fulfillment_status_label }}</td>
+              <td>{{ order.total_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    {%- endif -%}
+
+    <h2 style="margin-top: 2rem;">Default address</h2>
+    {%- if customer.default_address -%}
+      <p>
+        {{ customer.default_address.address1 }}<br>
+        {%- if customer.default_address.address2 != blank -%}{{ customer.default_address.address2 }}<br>{%- endif -%}
+        {{ customer.default_address.city }}, {{ customer.default_address.province_code }} {{ customer.default_address.zip }}
+      </p>
+    {%- else -%}
+      <p>No address on file.</p>
+    {%- endif -%}
+    <a href="{{ routes.account_addresses_url }}" class="btn btn--outline">Manage addresses</a>
+  </div>
+</section>

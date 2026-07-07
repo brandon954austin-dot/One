@@ -1,0 +1,61 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "AMA Quality Consulting",
+    "theme_version": "1.0.0",
+    "theme_author": "AMA Quality Consulting",
+    "theme_documentation_url": "https://www.amaqualityconsulting.com",
+    "theme_support_url": "https://www.amaqualityconsulting.com/pages/contact"
+  },
+  {
+    "name": "Contact & Booking",
+    "settings": [
+      {
+        "type": "text",
+        "id": "phone_display",
+        "label": "Phone number (displayed)",
+        "default": "(954) 444-2961"
+      },
+      {
+        "type": "text",
+        "id": "phone_tel",
+        "label": "Phone number (tel: link, digits only with country code)",
+        "default": "+19544442961"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact email",
+        "default": "Sales@amaqualityconsulting.com"
+      },
+      {
+        "type": "url",
+        "id": "calendly_url",
+        "label": "Booking link (Calendly)",
+        "info": "Every Book a Call button points here."
+      }
+    ]
+  },
+  {
+    "name": "Homepage",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "featured_collection",
+        "label": "Featured collection for the homepage grid"
+      },
+      {
+        "type": "text",
+        "id": "hero_heading",
+        "label": "Hero heading",
+        "default": "Get accredited. Stay compliant. Keep billing."
+      },
+      {
+        "type": "textarea",
+        "id": "hero_subheading",
+        "label": "Hero subheading",
+        "default": "We build custom DMEPOS compliance programs and accreditation packages for medical equipment suppliers — written around your actual operation, professionally assembled, and shipped to your door survey-ready."
+      }
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Browse</span>
+    <h1>Collections</h1>
+    <div class="grid grid--3" style="margin-top: 2rem;">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="card product-card">
+          <h3>{{ collection.title }}</h3>
+          <p>{{ collection.description | strip_html | truncate: 110 | default: collection.products_count | append: ' products' }}</p>
+          <span class="btn btn--outline">View collection</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

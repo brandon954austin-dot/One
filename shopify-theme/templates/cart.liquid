@@ -1,0 +1,62 @@
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Cart</span>
+    <h1>Your cart</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <p class="lede">Your cart is empty.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary btn--lg">Browse programs</a>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th colspan="2">Item</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr>
+                <td>
+                  {%- if item.image -%}
+                    <img src="{{ item.image | image_url: width: 144 }}" alt="{{ item.image.alt | default: item.title | escape }}" width="72" height="{{ 72 | divided_by: item.image.aspect_ratio | round }}">
+                  {%- endif -%}
+                </td>
+                <td>
+                  <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <br><small>{{ item.variant.title }}</small>
+                  {%- endunless -%}
+                  <br><a href="{{ item.url_to_remove }}" style="font-size: 0.85rem;">Remove</a>
+                </td>
+                <td>{{ item.price | money }}</td>
+                <td>
+                  <input
+                    type="number"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    aria-label="Quantity for {{ item.product.title | escape }}"
+                  >
+                </td>
+                <td>{{ item.final_line_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div class="cart-footer">
+          <button type="submit" name="update" class="btn btn--outline">Update cart</button>
+          <div class="total">Subtotal: {{ cart.total_price | money }}</div>
+          <button type="submit" name="checkout" class="btn btn--primary btn--lg">Check out</button>
+        </div>
+        <p style="text-align: right; color: var(--ink-soft); font-size: 0.9rem; margin-top: 0.8rem;">
+          Taxes and shipping calculated at checkout.
+        </p>
+      </form>
+    {%- endif -%}
+  </div>
+</section>

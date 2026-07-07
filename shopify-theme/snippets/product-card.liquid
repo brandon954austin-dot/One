@@ -1,0 +1,51 @@
+{%- comment -%}
+  Product card with ONE clean price (fixes the old theme's duplicated
+  "Regular price ... Regular price Sale price ..." bug) and no bogus
+  "Sale Sold out" badges on in-stock items.
+  Usage: {% render 'product-card', product: product %}
+{%- endcomment -%}
+<a href="{{ product.url }}" class="card product-card">
+  {%- if product.tags contains 'consult' -%}
+    <span class="badge">Custom-built</span>
+  {%- endif -%}
+
+  {%- if product.featured_image -%}
+    <img
+      class="product-card__img"
+      src="{{ product.featured_image | image_url: width: 640 }}"
+      alt="{{ product.featured_image.alt | default: product.title | escape }}"
+      loading="lazy"
+      width="640"
+      height="480"
+    >
+  {%- else -%}
+    <div class="product-card__img--placeholder" aria-hidden="true">
+      <svg width="56" height="56" viewBox="0 0 48 48" fill="none">
+        <path d="M24 3 L42 10 V22 C42 33.5 34.5 41.5 24 45 C13.5 41.5 6 33.5 6 22 V10 Z" fill="#0B2545"/>
+        <path d="M16 24 L22 30 L33 17" stroke="#12A5A0" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <h3>{{ product.title }}</h3>
+
+  <div class="price">
+    {%- if product.compare_at_price > product.price -%}
+      {{ product.price | money }} <s>{{ product.compare_at_price | money }}</s>
+    {%- elsif product.price_varies -%}
+      From {{ product.price_min | money }}
+    {%- else -%}
+      {{ product.price | money }}
+    {%- endif -%}
+  </div>
+
+  <p>{{ product.description | strip_html | truncate: 120 }}</p>
+
+  {%- if product.tags contains 'consult' -%}
+    <span class="btn btn--outline">Program details</span>
+  {%- elsif product.available -%}
+    <span class="btn btn--outline">View &amp; buy</span>
+  {%- else -%}
+    <span class="btn btn--outline">Sold out</span>
+  {%- endif -%}
+</a>

@@ -1,0 +1,36 @@
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Client portal</span>
+    <h1>Order {{ order.name }}</h1>
+    <p class="article-meta">Placed {{ order.created_at | date: '%B %-d, %Y' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+
+    <table class="cart-table">
+      <thead>
+        <tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr>
+      </thead>
+      <tbody>
+        {%- for line_item in order.line_items -%}
+          <tr>
+            <td>{{ line_item.title }}</td>
+            <td>{{ line_item.price | money }}</td>
+            <td>{{ line_item.quantity }}</td>
+            <td>{{ line_item.final_line_price | money }}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+
+    <div class="cart-footer">
+      <div>
+        <p style="margin-bottom: 0.3rem;">Subtotal: {{ order.line_items_subtotal_price | money }}</p>
+        {%- for shipping_method in order.shipping_methods -%}
+          <p style="margin-bottom: 0.3rem;">Shipping: {{ shipping_method.price | money }}</p>
+        {%- endfor -%}
+        <p style="margin-bottom: 0.3rem;">Tax: {{ order.tax_price | money }}</p>
+        <p class="total">Total: {{ order.total_price | money }}</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 1.6rem;"><a href="{{ routes.account_url }}">← Back to my account</a></p>
+  </div>
+</section>

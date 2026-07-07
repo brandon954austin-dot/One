@@ -1,0 +1,14 @@
+<section class="section">
+  <div class="container center" style="padding-block: 4rem;">
+    <span class="eyebrow">404</span>
+    <h1>That page doesn't exist</h1>
+    <p class="lede" style="margin-inline: auto;">The link may be outdated. Here's where to go instead:</p>
+    <div class="btn-row" style="justify-content: center;">
+      <a href="{{ routes.root_url }}" class="btn btn--primary">Homepage</a>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline">Shop Programs</a>
+      {%- if settings.calendly_url != blank -%}
+        <a href="{{ settings.calendly_url }}" class="btn btn--outline" target="_blank" rel="noopener">Book a Call</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,85 @@
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow" style="color: #12A5A0;">DMEPOS Compliance &amp; Accreditation Consulting</span>
+    <h1>{{ settings.hero_heading | default: 'Get accredited. Stay compliant. Keep billing.' }}</h1>
+    <p class="lede">{{ settings.hero_subheading }}</p>
+    <div class="btn-row">
+      {%- if settings.calendly_url != blank -%}
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>
+      {%- endif -%}
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline btn--lg">Shop Programs</a>
+    </div>
+    <div class="trust-strip">
+      <div><strong>30+ years</strong> DMEPOS industry experience</div>
+      <div><strong>100% custom</strong> flagship programs — never a template</div>
+      <div><strong>Delivered done</strong> printed, assembled &amp; shipped to you</div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section section--soft">
+  <div class="container">
+    <span class="eyebrow">How it works</span>
+    <h2>From first call to survey-ready binder</h2>
+    <div class="grid grid--3" style="margin-top: 1.8rem;">
+      <div class="card">
+        <div class="step-num">1</div>
+        <h3>Book a call</h3>
+        <p>A free consultation to understand your operation, your timeline, and which program fits — no pressure, no obligation.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">2</div>
+        <h3>Complete your intake</h3>
+        <p>A structured intake captures your products, staffing, and workflows so your program is written around reality, not boilerplate.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">3</div>
+        <h3>Receive your program</h3>
+        <p>Written, professionally printed, assembled, and shipped to your location — ready for the surveyor to open.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured products -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Programs</span>
+    <h2>Built for where your operation is today</h2>
+
+    {%- assign featured = collections[settings.featured_collection] -%}
+    {%- if featured == blank or featured.products_count == 0 -%}
+      {%- assign featured = collections.all -%}
+    {%- endif -%}
+
+    <div class="grid grid--3" style="margin-top: 1.8rem;">
+      {%- for product in featured.products limit: 6 -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        <p>No products yet — add products in your Shopify admin and they'll appear here.</p>
+      {%- endfor -%}
+    </div>
+
+    <p style="margin-top: 1.8rem;">
+      <a href="{{ routes.all_products_collection_url }}">See all programs &amp; templates →</a>
+    </p>
+  </div>
+</section>
+
+<!-- CTA band -->
+<section class="section section--navy">
+  <div class="container center">
+    <h2>Ready to get survey-ready?</h2>
+    <p class="lede" style="margin-inline: auto;">Book a free consultation. We'll talk through where your operation stands, what your survey timeline looks like, and exactly what it takes to get there.</p>
+    <div class="btn-row" style="justify-content: center;">
+      {%- if settings.calendly_url != blank -%}
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>
+      {%- endif -%}
+      {%- if settings.contact_email != blank -%}
+        <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

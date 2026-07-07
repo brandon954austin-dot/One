@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="container center" style="max-width: 40rem;">
+    <span class="eyebrow">Gift card</span>
+    <h1>{{ shop.name }} gift card</h1>
+    <div class="card">
+      <p class="lede" style="margin-inline: auto;">Value: {{ gift_card.initial_value | money }}</p>
+      {%- if gift_card.enabled == false or gift_card.expired -%}
+        <p><strong>This gift card is no longer valid.</strong></p>
+      {%- else -%}
+        <p>Your gift card code:</p>
+        <p style="font-size: 1.5rem; font-weight: 800; letter-spacing: 0.1em; color: var(--navy-900);">{{ gift_card.code | format_code }}</p>
+        <p style="color: var(--ink-soft);">Remaining balance: {{ gift_card.balance | money }}</p>
+        <a href="{{ shop.url }}" class="btn btn--primary">Start shopping</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

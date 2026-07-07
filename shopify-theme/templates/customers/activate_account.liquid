@@ -1,0 +1,33 @@
+<section class="section">
+  <div class="container" style="max-width: 34rem;">
+    <span class="eyebrow">Client portal</span>
+    <h1>Activate your account</h1>
+    <div class="card">
+      {% form 'activate_customer_password' %}
+        {%- if form.errors -%}
+          <div class="form-errors">
+            <ul>
+              {%- for field in form.errors -%}
+                <li>{{ form.errors.messages[field] }}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="act-password">Password</label>
+            <input type="password" id="act-password" name="customer[password]" required autocomplete="new-password">
+          </div>
+          <div class="form-field">
+            <label for="act-confirm">Confirm password</label>
+            <input type="password" id="act-confirm" name="customer[password_confirmation]" required autocomplete="new-password">
+          </div>
+          <div>
+            <button type="submit" class="btn btn--primary">Activate account</button>
+            <button type="submit" name="decline" class="btn btn--outline">Decline invitation</button>
+          </div>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</section>

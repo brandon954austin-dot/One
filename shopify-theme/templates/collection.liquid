@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Programs &amp; templates</span>
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p class="lede">{{ collection.description | strip_html }}</p>
+    {%- endif -%}
+
+    {% paginate collection.products by 12 %}
+      <div class="grid grid--3" style="margin-top: 2rem;">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product %}
+        {%- else -%}
+          <p>No products in this collection yet.</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">‹ Prev</a>{%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}">{{ part.title }}</a>
+            {%- elsif part.title == paginate.current_page -%}
+              <span class="current">{{ part.title }}</span>
+            {%- else -%}
+              <span>{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Next ›</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {% endpaginate %}
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<section class="section">
+  <div class="container" style="max-width: 34rem;">
+    <span class="eyebrow">Client portal</span>
+    <h1>Log in</h1>
+    <div class="card">
+      {% form 'customer_login' %}
+        {%- if form.errors -%}
+          <div class="form-errors">Incorrect email or password — please try again.</div>
+        {%- endif -%}
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" name="customer[email]" required autocomplete="email">
+          </div>
+          <div class="form-field">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="customer[password]" required autocomplete="current-password">
+          </div>
+          <div>
+            <button type="submit" class="btn btn--primary">Log in</button>
+          </div>
+          <p style="margin: 0;">
+            <a href="#recover" onclick="document.getElementById('recover-form').style.display='block'; return false;">Forgot your password?</a>
+            · <a href="{{ routes.account_register_url }}">Create an account</a>
+          </p>
+        </div>
+      {% endform %}
+
+      <div id="recover-form" style="display: none; margin-top: 1.6rem; border-top: 1px solid var(--line); padding-top: 1.4rem;">
+        <h3>Reset your password</h3>
+        {% form 'recover_customer_password' %}
+          {%- if form.posted_successfully? -%}
+            <p>We've sent you an email with a link to reset your password.</p>
+          {%- endif -%}
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="recover-email">Email</label>
+              <input type="email" id="recover-email" name="email" required autocomplete="email">
+            </div>
+            <div><button type="submit" class="btn btn--outline">Send reset link</button></div>
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>

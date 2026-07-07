@@ -1,0 +1,43 @@
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Search</span>
+    <h1>Search</h1>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="form-grid" style="max-width: 34rem;">
+      <div class="form-field">
+        <label for="search-q">Search programs, pages, and articles</label>
+        <input type="search" id="search-q" name="q" value="{{ search.terms | escape }}">
+      </div>
+      <div><button type="submit" class="btn btn--primary">Search</button></div>
+    </form>
+
+    {%- if search.performed -%}
+      {%- if search.results_count == 0 -%}
+        <p class="lede" style="margin-top: 2rem;">No results for “{{ search.terms | escape }}”.</p>
+      {%- else -%}
+        <p style="margin-top: 2rem;">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for “{{ search.terms | escape }}”</p>
+        {% paginate search.results by 12 %}
+          <div class="grid grid--3" style="margin-top: 1rem;">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product: item %}
+              {%- else -%}
+                <a href="{{ item.url }}" class="card product-card">
+                  <h3>{{ item.title }}</h3>
+                  <p>{{ item.content | strip_html | truncate: 120 }}</p>
+                  <span class="btn btn--outline">View</span>
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" aria-label="Pagination">
+              {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">‹ Prev</a>{%- endif -%}
+              {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Next ›</a>{%- endif -%}
+            </nav>
+          {%- endif -%}
+        {% endpaginate %}
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>

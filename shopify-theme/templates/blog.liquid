@@ -1,0 +1,26 @@
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Resources</span>
+    <h1>{{ blog.title }}</h1>
+    {% paginate blog.articles by 9 %}
+      <div class="grid grid--2" style="margin-top: 2rem;">
+        {%- for article in blog.articles -%}
+          <a href="{{ article.url }}" class="card product-card">
+            <h3>{{ article.title }}</h3>
+            <p class="article-meta" style="margin-bottom: 0.6rem;">{{ article.published_at | date: '%B %-d, %Y' }}</p>
+            <p>{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
+            <span class="btn btn--outline">Read the guide</span>
+          </a>
+        {%- else -%}
+          <p>No articles yet.</p>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">‹ Prev</a>{%- endif -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Next ›</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {% endpaginate %}
+  </div>
+</section>

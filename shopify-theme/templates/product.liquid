@@ -1,0 +1,122 @@
+{%- comment -%}
+  Product page with two modes:
+
+  1. Default — full click-to-buy: variant picker, quantity, Add to Cart,
+     and Shopify's dynamic "Buy it now" button (straight to checkout).
+
+  2. Tag a product "consult" in the Shopify admin and the buy buttons are
+     replaced with a Book a Call CTA — for flagship custom programs that
+     should start with a conversation instead of a checkout.
+     Remove the tag and it becomes instantly buyable again.
+{%- endcomment -%}
+
+{%- assign is_consult = false -%}
+{%- if product.tags contains 'consult' -%}
+  {%- assign is_consult = true -%}
+{%- endif -%}
+
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">
+      {%- if is_consult -%}Flagship program{%- else -%}Programs &amp; templates{%- endif -%}
+    </span>
+    <h1>{{ product.title }}</h1>
+
+    <div class="product-layout">
+      <div>
+        {%- if product.featured_image -%}
+          <div class="product-media">
+            <img
+              src="{{ product.featured_image | image_url: width: 1100 }}"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              width="1100"
+              height="{{ 1100 | divided_by: product.featured_image.aspect_ratio | round }}"
+            >
+          </div>
+        {%- endif -%}
+
+        <div class="product-description prose">
+          {{ product.description }}
+        </div>
+      </div>
+
+      <aside class="card buy-box">
+        <div class="price">
+          {%- if product.compare_at_price > product.price -%}
+            {{ product.price | money }} <s>{{ product.compare_at_price | money }}</s>
+          {%- else -%}
+            {{ product.price | money }}
+          {%- endif -%}
+        </div>
+
+        {%- if is_consult -%}
+          <p>This program is custom-built for your operation, so it starts with a free consultation — not a checkout button. Fixed price, no hourly billing, printing and shipping included.</p>
+          {%- if settings.calendly_url != blank -%}
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Book a Free Consultation</a>
+          {%- endif -%}
+          {%- if settings.phone_display != blank -%}
+            <p style="margin-top: 1rem; margin-bottom: 0;">Or call <a href="tel:{{ settings.phone_tel }}">{{ settings.phone_display }}</a></p>
+          {%- endif -%}
+
+        {%- elsif product.available -%}
+          {% form 'product', product %}
+            {%- unless product.has_only_default_variant -%}
+              <label for="variant-select" style="font-weight: 650; color: var(--navy-900); font-size: 0.95rem;">Options</label>
+              <select name="id" id="variant-select">
+                {%- for variant in product.variants -%}
+                  <option
+                    value="{{ variant.id }}"
+                    {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                    {% unless variant.available %}disabled{% endunless %}
+                  >
+                    {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} (sold out){% endunless %}
+                  </option>
+                {%- endfor -%}
+              </select>
+            {%- else -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {%- endunless -%}
+
+            <div class="qty-row">
+              <label for="quantity">Quantity</label>
+              <input type="number" id="quantity" name="quantity" value="1" min="1">
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg btn--full">Add to Cart</button>
+            {{ form | payment_button }}
+          {% endform %}
+
+          <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.9rem; color: var(--ink-soft);">
+            Questions before you buy?
+            {%- if settings.calendly_url != blank %}
+              <a href="{{ settings.calendly_url }}" target="_blank" rel="noopener">Book a free call</a>.
+            {%- elsif settings.contact_email != blank %}
+              <a href="mailto:{{ settings.contact_email }}">Email us</a>.
+            {%- endif %}
+          </p>
+
+        {%- else -%}
+          <p><strong>Currently unavailable.</strong></p>
+          {%- if settings.contact_email != blank -%}
+            <a href="mailto:{{ settings.contact_email }}?subject=Availability%20question%20—%20{{ product.title | url_encode }}" class="btn btn--outline btn--full">Ask about availability</a>
+          {%- endif -%}
+        {%- endif -%}
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section section--navy">
+  <div class="container center">
+    <h2>Questions about this program?</h2>
+    <p class="lede" style="margin-inline: auto;">Book a call or send a message — we'll give you a straight answer about whether it fits your situation.</p>
+    <div class="btn-row" style="justify-content: center;">
+      {%- if settings.calendly_url != blank -%}
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>
+      {%- endif -%}
+      {%- if settings.contact_email != blank -%}
+        <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

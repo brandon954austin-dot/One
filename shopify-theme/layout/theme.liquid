@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {%- comment -%}
+    Clean SEO title: no stray quote marks, one canonical brand name.
+    Shopify appends nothing — we control the full title here.
+  {%- endcomment -%}
+  <title>
+    {%- if template == 'index' -%}
+      {{ shop.name }} — DMEPOS Compliance & Accreditation Consulting
+    {%- else -%}
+      {{ page_title | strip }} | {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- else -%}
+    <meta name="description" content="Custom DMEPOS compliance programs, accreditation preparation, and implementation binder systems for durable medical equipment suppliers. 30+ years of industry experience.">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+
+  {{ content_for_header }}
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="{{ routes.root_url }}" class="brand" aria-label="{{ shop.name }} — home">
+        <svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 3 L42 10 V22 C42 33.5 34.5 41.5 24 45 C13.5 41.5 6 33.5 6 22 V10 Z" fill="#0B2545"/>
+          <path d="M24 7 L38 12.5 V22 C38 31.3 32.3 38 24 41 C15.7 38 10 31.3 10 22 V12.5 Z" fill="#13315C"/>
+          <path d="M16 24 L22 30 L33 17" stroke="#12A5A0" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ shop.name }}</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        {%- for link in linklists.main-menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+        <a href="{{ routes.cart_url }}" class="cart-link">
+          Cart{% if cart.item_count > 0 %} <span class="cart-count">{{ cart.item_count }}</span>{% endif %}
+        </a>
+        {%- if settings.calendly_url != blank -%}
+          <a href="{{ settings.calendly_url }}" class="btn btn--primary" target="_blank" rel="noopener">Book a Call</a>
+        {%- endif -%}
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    {{ content_for_layout }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>{{ shop.name }}</h4>
+          <p>Custom DMEPOS compliance programs, accreditation preparation, and implementation systems — built on 30+ years of industry experience.</p>
+        </div>
+        <div>
+          <h4>Navigate</h4>
+          <ul>
+            {%- for link in linklists.main-menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+            <li><a href="{{ routes.all_products_collection_url }}">All programs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            {%- if settings.phone_display != blank -%}
+              <li><a href="tel:{{ settings.phone_tel }}">{{ settings.phone_display }}</a></li>
+            {%- endif -%}
+            {%- if settings.contact_email != blank -%}
+              <li><a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></li>
+            {%- endif -%}
+            {%- if settings.calendly_url != blank -%}
+              <li><a href="{{ settings.calendly_url }}" target="_blank" rel="noopener">Book a Call</a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+        <p>{{ shop.name }} is an independent consulting firm and is not affiliated with, or endorsed by, the Centers for Medicare &amp; Medicaid Services (CMS) or any accrediting organization. Information on this site is general guidance, not legal advice.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function () {
+          var open = nav.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', String(open));
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

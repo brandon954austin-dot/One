@@ -1,0 +1,82 @@
+{%- comment -%}
+  Styled native Shopify contact form (replaces the old bare Google Forms
+  iframe). Assign this template to your Contact page in the Shopify admin:
+  Online Store → Pages → Contact → Theme template → "page.contact".
+  Submissions arrive at the store's sender email.
+{%- endcomment -%}
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Contact</span>
+    <h1>{{ page.title | default: 'Get in touch' }}</h1>
+
+    {%- if page.content != blank -%}
+      <div class="prose">{{ page.content }}</div>
+    {%- else -%}
+      <p class="lede">Question about a program, your survey timeline, or whether we're a fit? Send a message — we respond within one business day.</p>
+    {%- endif -%}
+
+    <div class="grid grid--2" style="margin-top: 2rem; align-items: start;">
+      <div class="card">
+        {% form 'contact' %}
+          {%- if form.posted_successfully? -%}
+            <p style="background: var(--teal-50); border: 1px solid var(--teal-100); border-radius: var(--radius); padding: 0.8rem 1.1rem;">
+              Thanks — your message has been sent. We'll get back to you within one business day.
+            </p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="form-errors">
+              <strong>Please fix the following:</strong>
+              <ul>
+                {%- for field in form.errors -%}
+                  <li>{{ form.errors.messages[field] }}</li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="contact-name">Your name</label>
+              <input type="text" id="contact-name" name="contact[name]" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="contact-email">Email</label>
+              <input type="email" id="contact-email" name="contact[email]" required autocomplete="email">
+            </div>
+            <div class="form-field">
+              <label for="contact-phone">Phone (optional)</label>
+              <input type="tel" id="contact-phone" name="contact[phone]" autocomplete="tel">
+            </div>
+            <div class="form-field">
+              <label for="contact-body">Message</label>
+              <textarea id="contact-body" name="contact[body]" rows="5" required></textarea>
+              <p style="font-size: 0.85rem; color: var(--ink-soft); margin: 0.3rem 0 0;">Please don't include patient information (PHI) in this form.</p>
+            </div>
+            <div>
+              <button type="submit" class="btn btn--primary btn--lg">Send message</button>
+            </div>
+          </div>
+        {% endform %}
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom: 1.4rem;">
+          <h3>Prefer to talk?</h3>
+          <p style="color: var(--ink-soft);">The fastest path is a scheduled call — pick a time that works and we'll call you.</p>
+          {%- if settings.calendly_url != blank -%}
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary" target="_blank" rel="noopener">Book a Call</a>
+          {%- endif -%}
+        </div>
+        <div class="card">
+          <h3>Direct contact</h3>
+          {%- if settings.phone_display != blank -%}
+            <p style="margin-bottom: 0.4rem;"><a href="tel:{{ settings.phone_tel }}">{{ settings.phone_display }}</a></p>
+          {%- endif -%}
+          {%- if settings.contact_email != blank -%}
+            <p style="margin-bottom: 0;"><a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

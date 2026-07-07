@@ -1,0 +1,66 @@
+<section class="section">
+  <div class="container" style="max-width: 40rem;">
+    <span class="eyebrow">Client portal</span>
+    <h1>Addresses</h1>
+    <p><a href="{{ routes.account_url }}">← Back to my account</a></p>
+
+    {%- for address in customer.addresses -%}
+      <div class="card" style="margin-bottom: 1rem;">
+        {%- if address == customer.default_address -%}<span class="badge">Default</span>{%- endif -%}
+        <p style="margin-bottom: 0.6rem;">
+          {{ address.first_name }} {{ address.last_name }}<br>
+          {{ address.address1 }}<br>
+          {%- if address.address2 != blank -%}{{ address.address2 }}<br>{%- endif -%}
+          {{ address.city }}, {{ address.province_code }} {{ address.zip }}<br>
+          {{ address.country }}
+        </p>
+        {% form 'customer_address', address, id: address.id %}
+          <button type="submit" class="btn btn--outline" onclick="return confirm('Delete this address?')" formaction="{{ address.url }}?_method=delete">Delete</button>
+        {% endform %}
+      </div>
+    {%- else -%}
+      <p>No saved addresses.</p>
+    {%- endfor -%}
+
+    <h2 style="margin-top: 2rem;">Add a new address</h2>
+    <div class="card">
+      {% form 'customer_address', customer.new_address %}
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="addr-first">First name</label>
+            <input type="text" id="addr-first" name="address[first_name]" autocomplete="given-name">
+          </div>
+          <div class="form-field">
+            <label for="addr-last">Last name</label>
+            <input type="text" id="addr-last" name="address[last_name]" autocomplete="family-name">
+          </div>
+          <div class="form-field">
+            <label for="addr-1">Address</label>
+            <input type="text" id="addr-1" name="address[address1]" autocomplete="address-line1">
+          </div>
+          <div class="form-field">
+            <label for="addr-2">Apartment, suite, etc.</label>
+            <input type="text" id="addr-2" name="address[address2]" autocomplete="address-line2">
+          </div>
+          <div class="form-field">
+            <label for="addr-city">City</label>
+            <input type="text" id="addr-city" name="address[city]" autocomplete="address-level2">
+          </div>
+          <div class="form-field">
+            <label for="addr-province">State/Province</label>
+            <input type="text" id="addr-province" name="address[province]" autocomplete="address-level1">
+          </div>
+          <div class="form-field">
+            <label for="addr-zip">ZIP</label>
+            <input type="text" id="addr-zip" name="address[zip]" autocomplete="postal-code">
+          </div>
+          <div class="form-field">
+            <label for="addr-country">Country</label>
+            <input type="text" id="addr-country" name="address[country]" value="United States" autocomplete="country-name">
+          </div>
+          <div><button type="submit" class="btn btn--primary">Save address</button></div>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</section>
