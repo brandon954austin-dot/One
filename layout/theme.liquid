@@ -35,9 +35,18 @@
     <div class="container site-header__inner">
       <a href="{{ routes.root_url }}" class="brand" aria-label="{{ shop.name }} — home">
         <svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <path d="M24 3 L42 10 V22 C42 33.5 34.5 41.5 24 45 C13.5 41.5 6 33.5 6 22 V10 Z" fill="#0B2545"/>
-          <path d="M24 7 L38 12.5 V22 C38 31.3 32.3 38 24 41 C15.7 38 10 31.3 10 22 V12.5 Z" fill="#13315C"/>
-          <path d="M16 24 L22 30 L33 17" stroke="#12A5A0" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="amaL" x1="14" y1="12" x2="20" y2="32" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#1d2a9e"/>
+              <stop offset="1" stop-color="#2f45f0"/>
+            </linearGradient>
+            <linearGradient id="amaR" x1="34" y1="10" x2="20" y2="32" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#35de84"/>
+              <stop offset="1" stop-color="#2bd473"/>
+            </linearGradient>
+          </defs>
+          <path d="M14 18.5 L20 31" stroke="url(#amaL)" stroke-width="13" stroke-linecap="round"/>
+          <path d="M33.5 13.5 L20 31" stroke="url(#amaR)" stroke-width="13" stroke-linecap="round"/>
         </svg>
         <span>{{ shop.name }}</span>
       </a>
