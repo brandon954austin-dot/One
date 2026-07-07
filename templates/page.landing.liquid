@@ -360,8 +360,13 @@
 
 <script>
   // After a successful submit Shopify reloads the page; jump to the
-  // thank-you card so the lead sees the booking CTA immediately.
+  // thank-you card so the lead sees the booking CTA immediately, and
+  // fire the Meta Pixel Lead event exactly once per submission.
   if (window.location.search.indexOf('contact_posted=true') !== -1) {
     document.getElementById('lead-form').scrollIntoView();
+    if (typeof fbq === 'function' && !sessionStorage.getItem('ama_lead_fired')) {
+      fbq('track', 'Lead', { content_name: {{ page.title | default: 'Landing page' | json }} });
+      sessionStorage.setItem('ama_lead_fired', '1');
+    }
   }
 </script>

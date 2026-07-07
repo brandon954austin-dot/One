@@ -11,6 +11,7 @@
   <link rel="canonical" href="{{ canonical_url }}">
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+  {% render 'meta-pixel' %}
   {{ content_for_header }}
 </head>
 <body>

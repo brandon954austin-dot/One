@@ -37,6 +37,17 @@
     ]
   },
   {
+    "name": "Tracking",
+    "settings": [
+      {
+        "type": "text",
+        "id": "meta_pixel_id",
+        "label": "Meta Pixel ID",
+        "info": "Numeric Pixel ID from Meta Events Manager. When set, the Pixel loads on every page and lead-form submissions fire a Lead event."
+      }
+    ]
+  },
+  {
     "name": "Homepage",
     "settings": [
       {
