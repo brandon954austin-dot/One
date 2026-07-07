@@ -1,0 +1,367 @@
+{% layout 'landing' %}
+
+{%- comment -%}
+  Lead-funnel landing page. Assign in the Shopify admin:
+  Online Store → Pages → (your landing page) → Theme template → "page.landing".
+  Every CTA scrolls to the lead form; after submission the thank-you state
+  pushes the Calendly booking link. Header/footer are the stripped-down
+  "landing" layout so leads aren't distracted by site navigation.
+{%- endcomment -%}
+
+<style>
+  .lp-hero {
+    background:
+      radial-gradient(900px 480px at 88% -8%, rgba(43, 212, 115, 0.18), transparent 60%),
+      radial-gradient(700px 420px at -10% 110%, rgba(47, 69, 240, 0.22), transparent 55%),
+      linear-gradient(160deg, var(--navy-900), var(--navy-950));
+    color: #e8eef5;
+    padding-block: clamp(3rem, 7vw, 5rem);
+    overflow: hidden;
+  }
+  .lp-hero-grid { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 920px) { .lp-hero-grid { grid-template-columns: 1.15fr 0.85fr; } }
+  .lp-hero h1 { color: #fff; max-width: 20ch; }
+  .lp-hero .lede { color: #c3d2e2; }
+  .lp-kicker {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(43, 212, 115, 0.14); border: 1px solid rgba(43, 212, 115, 0.35);
+    color: #7cefc4; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 99px; margin-bottom: 1.1rem;
+  }
+  .lp-check-line { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1.4rem; }
+  .lp-check-line div { display: flex; gap: 0.6rem; align-items: flex-start; color: #d7e2ee; font-size: 1.02rem; }
+  .lp-check-line svg { flex-shrink: 0; margin-top: 0.22em; }
+  .lp-hero .btn--outline { color: #fff; border-color: #fff; }
+  .lp-hero .btn--outline:hover { background: #fff; color: var(--navy-900); }
+
+  /* Hero illustration: survey-ready binder scene */
+  .lp-scene { position: relative; display: flex; justify-content: center; }
+  .lp-scene svg { width: 100%; max-width: 430px; height: auto; filter: drop-shadow(0 24px 40px rgba(2, 8, 20, 0.45)); }
+
+  .lp-pain { background: var(--bg-soft); }
+  .lp-pain .card { border-top: 4px solid var(--teal-500); }
+  .lp-pain .card h3 { display: flex; gap: 0.6rem; align-items: center; }
+
+  .lp-band {
+    background: linear-gradient(160deg, var(--navy-900), var(--navy-950));
+    color: #e8eef5; border-radius: var(--radius-lg);
+    padding: clamp(1.8rem, 4vw, 3rem); display: grid; gap: 1.6rem;
+  }
+  @media (min-width: 860px) { .lp-band { grid-template-columns: auto 1fr auto; align-items: center; } }
+  .lp-band h3 { color: #fff; margin: 0 0 0.2rem; }
+  .lp-band p { color: #c3d2e2; margin: 0; }
+
+  .lp-form-section {
+    background:
+      radial-gradient(800px 400px at 12% 0%, rgba(47, 69, 240, 0.14), transparent 60%),
+      linear-gradient(160deg, var(--navy-950), var(--navy-900));
+    color: #e8eef5;
+  }
+  .lp-form-grid { display: grid; gap: 2.5rem; align-items: start; }
+  @media (min-width: 920px) { .lp-form-grid { grid-template-columns: 1fr 460px; } }
+  .lp-form-section h2 { color: #fff; }
+  .lp-form-section .lede { color: #c3d2e2; }
+  .lp-form-card { background: #fff; color: var(--ink); border-radius: var(--radius-lg); padding: clamp(1.4rem, 3vw, 2rem); box-shadow: 0 24px 60px rgba(2, 8, 20, 0.45); }
+  .lp-form-card .form-grid { max-width: none; }
+  .lp-form-card .form-grid > * { min-width: 0; }
+  .lp-form-card select { min-width: 0; max-width: 100%; }
+  .lp-form-card h3 { margin-bottom: 0.3rem; }
+  .lp-form-card .form-sub { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 1.2rem; }
+  .lp-privacy-note { font-size: 0.82rem; color: var(--ink-soft); margin: 0.8rem 0 0; }
+
+  .lp-success { text-align: center; padding-block: 0.8rem; }
+  .lp-success .lp-success-mark { margin-bottom: 0.8rem; }
+  .lp-success h3 { font-size: 1.35rem; }
+
+  .lp-book-divider { display: flex; align-items: center; gap: 0.8rem; color: var(--ink-soft); font-size: 0.85rem; margin: 1.3rem 0 1rem; }
+  .lp-book-divider::before, .lp-book-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  html { scroll-behavior: smooth; }
+</style>
+
+<!-- ============ HERO ============ -->
+<section class="lp-hero">
+  <div class="container lp-hero-grid">
+    <div>
+      <span class="lp-kicker">DMEPOS Accreditation &amp; Compliance</span>
+      <h1>Pass your survey the first time — with a program built for <em>your</em> operation.</h1>
+      <p class="lede">Custom DMEPOS compliance programs and accreditation packages, written around how you actually operate — professionally assembled and shipped to your door survey-ready.</p>
+      <div class="lp-check-line">
+        <div>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>30+ years</strong> of DMEPOS industry experience on your side</span>
+        </div>
+        <div>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>100% custom</strong> — written around your products, staff, and workflows</span>
+        </div>
+        <div>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>Delivered done</strong> — printed, assembled, and shipped ready for the surveyor</span>
+        </div>
+      </div>
+      <div class="btn-row">
+        <a href="#lead-form" class="btn btn--primary btn--lg">Get My Free Readiness Review</a>
+        {%- if settings.calendly_url != blank -%}
+          <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--lg" target="_blank" rel="noopener">Book a Call Instead</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="lp-scene" aria-hidden="true">
+      <!-- Survey-ready binder illustration -->
+      <svg viewBox="0 0 440 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lpCover" x1="90" y1="60" x2="330" y2="360" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#13315c"/>
+            <stop offset="1" stop-color="#0b2545"/>
+          </linearGradient>
+          <linearGradient id="lpSpine" x1="70" y1="60" x2="70" y2="360" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#1d2a9e"/>
+            <stop offset="1" stop-color="#10154f"/>
+          </linearGradient>
+          <linearGradient id="lpBadge" x1="290" y1="260" x2="390" y2="360" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#38df85"/>
+            <stop offset="1" stop-color="#25c4a0"/>
+          </linearGradient>
+          <linearGradient id="lpTab1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#2f45f0"/><stop offset="1" stop-color="#2438cf"/>
+          </linearGradient>
+        </defs>
+
+        <!-- pages behind -->
+        <rect x="96" y="70" width="252" height="300" rx="10" fill="#e9eef5"/>
+        <rect x="90" y="64" width="252" height="300" rx="10" fill="#f6f9fc"/>
+
+        <!-- binder cover -->
+        <rect x="82" y="56" width="252" height="304" rx="12" fill="url(#lpCover)"/>
+        <rect x="66" y="56" width="30" height="304" rx="10" fill="url(#lpSpine)"/>
+        <circle cx="81" cy="120" r="5" fill="#0a1330"/>
+        <circle cx="81" cy="208" r="5" fill="#0a1330"/>
+        <circle cx="81" cy="296" r="5" fill="#0a1330"/>
+
+        <!-- cover content -->
+        <g transform="translate(120, 92)">
+          <path d="M8 12 L14 25" stroke="#2f45f0" stroke-width="11" stroke-linecap="round"/>
+          <path d="M28 7 L15 25" stroke="#2bd473" stroke-width="12" stroke-linecap="round"/>
+          <rect x="46" y="4" width="120" height="10" rx="5" fill="#ffffff" opacity="0.92"/>
+          <rect x="46" y="21" width="84" height="8" rx="4" fill="#8fa8c7"/>
+        </g>
+        <rect x="120" y="150" width="176" height="7" rx="3.5" fill="#3d5a80"/>
+        <rect x="120" y="167" width="150" height="7" rx="3.5" fill="#3d5a80"/>
+        <rect x="120" y="184" width="163" height="7" rx="3.5" fill="#3d5a80"/>
+
+        <!-- checklist rows on cover -->
+        <g transform="translate(120, 214)">
+          <circle cx="10" cy="10" r="10" fill="rgba(43,212,115,0.2)"/>
+          <path d="M5.5 10.5l3 3 6.5-7" stroke="#2bd473" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="30" y="5" width="120" height="9" rx="4.5" fill="#22406b"/>
+        </g>
+        <g transform="translate(120, 248)">
+          <circle cx="10" cy="10" r="10" fill="rgba(43,212,115,0.2)"/>
+          <path d="M5.5 10.5l3 3 6.5-7" stroke="#2bd473" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="30" y="5" width="140" height="9" rx="4.5" fill="#22406b"/>
+        </g>
+        <g transform="translate(120, 282)">
+          <circle cx="10" cy="10" r="10" fill="rgba(43,212,115,0.2)"/>
+          <path d="M5.5 10.5l3 3 6.5-7" stroke="#2bd473" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="30" y="5" width="104" height="9" rx="4.5" fill="#22406b"/>
+        </g>
+
+        <!-- index tabs -->
+        <rect x="330" y="96" width="34" height="26" rx="6" fill="url(#lpTab1)"/>
+        <rect x="330" y="136" width="34" height="26" rx="6" fill="#2bd473"/>
+        <rect x="330" y="176" width="34" height="26" rx="6" fill="#12a5a0"/>
+        <rect x="330" y="216" width="34" height="26" rx="6" fill="#3d5a80"/>
+
+        <!-- floating "Survey-Ready" badge -->
+        <g transform="translate(288, 268)">
+          <circle cx="52" cy="52" r="52" fill="url(#lpBadge)"/>
+          <circle cx="52" cy="52" r="42" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2.5" stroke-dasharray="4 6"/>
+          <path d="M34 54l12 12 24-26" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+
+        <!-- floating stat chip -->
+        <g transform="translate(18, 300)">
+          <rect width="150" height="58" rx="12" fill="#ffffff"/>
+          <text x="16" y="26" font-family="Arial, sans-serif" font-size="17" font-weight="800" fill="#0b2545">30+ years</text>
+          <text x="16" y="45" font-family="Arial, sans-serif" font-size="12" fill="#5b6b7d">DMEPOS experience</text>
+        </g>
+
+        <!-- floating chip top -->
+        <g transform="translate(20, 26)">
+          <rect width="176" height="46" rx="12" fill="#ffffff"/>
+          <circle cx="23" cy="23" r="11" fill="rgba(43,212,115,0.2)"/>
+          <path d="M18 23.5l3.4 3.4 7-7.6" stroke="#25c4a0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="42" y="28" font-family="Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0b2545">Accreditation-ready</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAIN / STAKES ============ -->
+<section class="section lp-pain">
+  <div class="container">
+    <span class="eyebrow">Why it matters</span>
+    <h2>An unprepared survey doesn't just fail — it stops your billing.</h2>
+    <div class="grid grid--3" style="margin-top: 1.8rem;">
+      <div class="card">
+        <h3><span aria-hidden="true">⚠️</span> Generic templates get flagged</h3>
+        <p>Surveyors can tell when a compliance manual doesn't match the operation in front of them. Boilerplate that contradicts your actual workflow is a finding waiting to happen.</p>
+      </div>
+      <div class="card">
+        <h3><span aria-hidden="true">⏱️</span> Deadlines don't wait</h3>
+        <p>Accreditation, reaccreditation, and enrollment windows are unforgiving. Every week without a survey-ready program is a week of revenue at risk.</p>
+      </div>
+      <div class="card">
+        <h3><span aria-hidden="true">📋</span> DIY costs more than it saves</h3>
+        <p>Writing policies from scratch while running a supply business means late nights and blind spots. One missed standard can cost far more than doing it right the first time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">How it works</span>
+    <h2>From first call to survey-ready binder</h2>
+    <div class="grid grid--3" style="margin-top: 1.8rem;">
+      <div class="card">
+        <div class="step-num">1</div>
+        <h3>Tell us where you stand</h3>
+        <p>Fill out the short form below (or book a call directly). We'll review your situation — new supplier, accreditation renewal, or compliance cleanup — for free.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">2</div>
+        <h3>We build your program</h3>
+        <p>A structured intake captures your products, staffing, and workflows so your program reflects reality, not boilerplate. Fixed price — no hourly billing.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">3</div>
+        <h3>Open the box, pass the survey</h3>
+        <p>Your program arrives written, professionally printed, and assembled — organized exactly the way a surveyor expects to see it.</p>
+      </div>
+    </div>
+
+    <div class="lp-band" style="margin-top: 2.4rem;">
+      <svg width="54" height="54" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <circle cx="24" cy="24" r="22" fill="rgba(43,212,115,0.15)"/>
+        <path d="M14 24.5l7 7 13-15" stroke="#2bd473" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <h3>Free readiness review — no pressure, no obligation.</h3>
+        <p>Fifteen minutes to find out exactly where your operation stands and what it takes to get survey-ready.</p>
+      </div>
+      <a href="#lead-form" class="btn btn--primary btn--lg">Start Below ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEAD FORM (funnel end) ============ -->
+<section class="section lp-form-section" id="lead-form">
+  <div class="container lp-form-grid">
+    <div>
+      <span class="eyebrow" style="color: #7cefc4;">Get started</span>
+      <h2>Get your free DMEPOS readiness review</h2>
+      <p class="lede">Tell us a little about your operation. We'll reply within one business day with honest answers about your timeline, your gaps, and what it takes to close them.</p>
+      <div class="lp-check-line">
+        <div>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Straight answers from a 30-year industry veteran — not a sales script</span>
+        </div>
+        <div>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Your information stays private — see our <a href="/pages/privacy-policy" style="color: #7cefc4;">privacy policy</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-form-card">
+      {% form 'contact' %}
+        {%- if form.posted_successfully? -%}
+          <div class="lp-success">
+            <div class="lp-success-mark">
+              <svg width="64" height="64" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <circle cx="24" cy="24" r="22" fill="rgba(43,212,115,0.16)"/>
+                <path d="M14 24.5l7 7 13-15" stroke="#25c4a0" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>You're in — we'll be in touch within one business day.</h3>
+            <p style="color: var(--ink-soft);">Want answers faster? Grab a time on the calendar and let's talk it through.</p>
+            {%- if settings.calendly_url != blank -%}
+              <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Book My Free Call Now</a>
+            {%- endif -%}
+            {%- if settings.phone_display != blank -%}
+              <p style="margin: 1rem 0 0; font-size: 0.95rem;">Or call us directly: <a href="tel:{{ settings.phone_tel }}"><strong>{{ settings.phone_display }}</strong></a></p>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          <h3>Free Readiness Review</h3>
+          <p class="form-sub">Takes about 60 seconds. No obligation.</p>
+
+          {%- if form.errors -%}
+            <div class="form-errors">
+              <strong>Please fix the following:</strong>
+              <ul>
+                {%- for field in form.errors -%}
+                  <li>{{ form.errors.messages[field] }}</li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="lead-name">Your name</label>
+              <input type="text" id="lead-name" name="contact[name]" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="lead-company">Business name</label>
+              <input type="text" id="lead-company" name="contact[business_name]" autocomplete="organization">
+            </div>
+            <div class="form-field">
+              <label for="lead-email">Email</label>
+              <input type="email" id="lead-email" name="contact[email]" required autocomplete="email">
+            </div>
+            <div class="form-field">
+              <label for="lead-phone">Phone</label>
+              <input type="tel" id="lead-phone" name="contact[phone]" autocomplete="tel">
+            </div>
+            <div class="form-field">
+              <label for="lead-status">Which best describes you?</label>
+              <select id="lead-status" name="contact[supplier_status]">
+                <option>New supplier — getting accredited for the first time</option>
+                <option>Existing supplier — reaccreditation coming up</option>
+                <option>Existing supplier — compliance program needs work</option>
+                <option>Just exploring options</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="lead-body">Anything we should know? (optional)</label>
+              <textarea id="lead-body" name="contact[body]" rows="3" placeholder="Timeline, products you supply, current situation…"></textarea>
+            </div>
+            <div>
+              <button type="submit" class="btn btn--primary btn--lg btn--full">Get My Free Review</button>
+            </div>
+          </div>
+
+          {%- if settings.calendly_url != blank -%}
+            <div class="lp-book-divider">or skip the form</div>
+            <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Call Now</a>
+          {%- endif -%}
+          <p class="lp-privacy-note">We respond within one business day. Please don't include patient information (PHI). By submitting you agree to our <a href="/pages/privacy-policy">privacy policy</a>.</p>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+<script>
+  // After a successful submit Shopify reloads the page; jump to the
+  // thank-you card so the lead sees the booking CTA immediately.
+  if (window.location.search.indexOf('contact_posted=true') !== -1) {
+    document.getElementById('lead-form').scrollIntoView();
+  }
+</script>

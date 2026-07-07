@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title | strip }} | {{ shop.name }}</title>
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+  {{ content_for_header }}
+</head>
+<body>
+
+  {%- comment -%} Distraction-free funnel chrome: logo + phone, no nav links. {%- endcomment -%}
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <span class="brand">
+        <svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="amaNavy" x1="12" y1="14" x2="18" y2="32" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#10154f"/>
+              <stop offset="1" stop-color="#1d2a9e"/>
+            </linearGradient>
+            <linearGradient id="amaBlue" x1="21" y1="14" x2="19" y2="27" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#2f45f0"/>
+              <stop offset="1" stop-color="#2438cf"/>
+            </linearGradient>
+            <linearGradient id="amaGreen" x1="34" y1="10" x2="18" y2="33" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#38df85"/>
+              <stop offset="0.75" stop-color="#2bd473"/>
+              <stop offset="1" stop-color="#25c4a0"/>
+            </linearGradient>
+          </defs>
+          <path d="M12.5 18.5 L19 31.5" stroke="url(#amaNavy)" stroke-width="11.5" stroke-linecap="round"/>
+          <path d="M20.5 16 L20 23" stroke="url(#amaBlue)" stroke-width="12.5" stroke-linecap="round"/>
+          <path d="M33.5 13 L19.5 31.5" stroke="url(#amaGreen)" stroke-width="13" stroke-linecap="round"/>
+        </svg>
+        <span>{{ shop.name }}</span>
+      </span>
+      {%- if settings.phone_display != blank -%}
+        <a href="tel:{{ settings.phone_tel }}" style="margin-left: auto; text-decoration: none; font-weight: 650; color: var(--navy-900); white-space: nowrap;">
+          📞 {{ settings.phone_display }}
+        </a>
+      {%- endif -%}
+    </div>
+  </header>
+
+  <main id="main">
+    {{ content_for_layout }}
+  </main>
+
+  <footer class="site-footer" style="padding-block: 1.6rem;">
+    <div class="container">
+      <div class="footer-legal" style="border-top: none; padding-top: 0; text-align: center;">
+        <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved. · <a href="/pages/privacy-policy">Privacy Policy</a></p>
+        <p>{{ shop.name }} is an independent consulting firm and is not affiliated with, or endorsed by, the Centers for Medicare &amp; Medicaid Services (CMS) or any accrediting organization.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
