@@ -42,11 +42,14 @@
         </svg>
         <span>{{ shop.name }}</span>
       </span>
-      {%- if settings.phone_display != blank -%}
-        <a href="tel:{{ settings.phone_tel }}" style="margin-left: auto; text-decoration: none; font-weight: 650; color: var(--navy-900); white-space: nowrap;">
-          📞 {{ settings.phone_display }}
-        </a>
-      {%- endif -%}
+      <div style="margin-left: auto; display: flex; align-items: center; gap: 1.1rem;">
+        {%- if settings.phone_display != blank -%}
+          <a href="tel:{{ settings.phone_tel }}" style="text-decoration: none; font-weight: 650; color: var(--navy-900); white-space: nowrap;">
+            📞 {{ settings.phone_display }}
+          </a>
+        {%- endif -%}
+        <a href="#lead-form" class="btn btn--primary" style="white-space: nowrap;">Get My Free Review</a>
+      </div>
     </div>
   </header>
 

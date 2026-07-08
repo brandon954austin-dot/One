@@ -76,6 +76,35 @@
   .lp-book-divider { display: flex; align-items: center; gap: 0.8rem; color: var(--ink-soft); font-size: 0.85rem; margin: 1.3rem 0 1rem; }
   .lp-book-divider::before, .lp-book-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
+  .lp-reassure { margin: 0.9rem 0 0; font-size: 0.9rem; color: #9fb3c8; }
+
+  .lp-2026 { background: var(--navy-800); color: #dfe8f1; padding-block: 1.1rem; font-size: 0.95rem; }
+  .lp-2026-inner { display: flex; flex-wrap: wrap; gap: 0.5rem 2.2rem; align-items: center; }
+  .lp-2026-inner strong { color: #7cefc4; font-weight: 700; }
+  .lp-2026-inner span { display: inline-flex; align-items: center; gap: 0.5rem; }
+
+  .lp-authority { display: flex; gap: 1rem; align-items: flex-start; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--radius-lg); padding: 1.1rem 1.3rem; margin-top: 1.6rem; }
+  .lp-authority svg { flex-shrink: 0; }
+  .lp-authority p { margin: 0; font-size: 0.95rem; color: #c3d2e2; }
+  .lp-authority strong { color: #fff; }
+
+  .lp-faq details { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 0.7rem; box-shadow: var(--shadow-card); }
+  .lp-faq summary { cursor: pointer; font-weight: 650; color: var(--navy-900); padding: 1rem 1.2rem; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .lp-faq summary::-webkit-details-marker { display: none; }
+  .lp-faq summary::after { content: "+"; font-size: 1.3rem; font-weight: 400; color: var(--teal-600); flex-shrink: 0; }
+  .lp-faq details[open] summary::after { content: "−"; }
+  .lp-faq details p { margin: 0; padding: 0 1.2rem 1.1rem; color: var(--ink-soft); }
+
+  .lp-sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 60;
+    background: rgba(8, 27, 48, 0.97); backdrop-filter: blur(6px);
+    padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom));
+    transform: translateY(110%); transition: transform 0.25s ease;
+  }
+  .lp-sticky-cta.is-visible { transform: translateY(0); }
+  .lp-sticky-cta .btn { display: block; width: 100%; text-align: center; }
+  @media (min-width: 920px) { .lp-sticky-cta { display: none; } }
+
   html { scroll-behavior: smooth; }
 </style>
 
@@ -106,6 +135,7 @@
           <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--lg" target="_blank" rel="noopener">Book a Call Instead</a>
         {%- endif -%}
       </div>
+      <p class="lp-reassure">Free · takes 60 seconds · no obligation, no sales pressure</p>
     </div>
 
     <div class="lp-scene" aria-hidden="true">
@@ -113,6 +143,16 @@
     </div>
   </div>
 </section>
+
+<!-- ============ 2026 URGENCY STRIP ============ -->
+<div class="lp-2026">
+  <div class="container lp-2026-inner">
+    <strong>New for 2026:</strong>
+    <span>Reaccreditation is now annual - the 3-year cycle is gone</span>
+    <span>New locations must pass a survey before accreditation</span>
+    <span>Accreditation doesn't transfer after ownership changes</span>
+  </div>
+</div>
 
 <!-- ============ PAIN / STAKES ============ -->
 <section class="section lp-pain">
@@ -173,22 +213,60 @@
   </div>
 </section>
 
+<!-- ============ FAQ / OBJECTIONS ============ -->
+<section class="section section--soft lp-faq">
+  <div class="container" style="max-width: 780px;">
+    <span class="eyebrow">Common questions</span>
+    <h2>Before you ask...</h2>
+    <div style="margin-top: 1.6rem;">
+      <details>
+        <summary>Is the readiness review really free?</summary>
+        <p>Yes. It's a short, focused review of where your operation stands - your timeline, your risk areas, and what it would take to close the gaps. You leave with that picture whether or not you ever hire us. No obligation, no pressure.</p>
+      </details>
+      <details>
+        <summary>We already have a policy manual. Do we still need this?</summary>
+        <p>A binder on the shelf isn't the test anymore. With annual reaccreditation, surveyors check whether your day-to-day operations actually match your written program - document control, staff training, site readiness. That's exactly what the review looks at.</p>
+      </details>
+      <details>
+        <summary>Do you guarantee accreditation?</summary>
+        <p>No one can honestly guarantee accreditation or Medicare billing privileges - accrediting organizations and enrollment contractors decide independently. What we do is help you identify and correct readiness gaps, prepare documentation, and strengthen operational compliance so you walk into the survey prepared.</p>
+      </details>
+      <details>
+        <summary>How fast can we get survey-ready?</summary>
+        <p>It depends on the gaps. Some suppliers need a few targeted fixes; others need a full program built. The readiness review gives you a realistic timeline for your situation - that's the point of doing it before committing to anything.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ============ LEAD FORM (funnel end) ============ -->
 <section class="section lp-form-section" id="lead-form">
   <div class="container lp-form-grid">
     <div>
       <span class="eyebrow" style="color: #7cefc4;">Get started</span>
       <h2>Get your free DMEPOS readiness review</h2>
-      <p class="lede">Tell us a little about your operation. We'll reply within one business day with honest answers about your timeline, your gaps, and what it takes to close them.</p>
+      <p class="lede">Tell us a little about your operation. Within one business day you'll have:</p>
       <div class="lp-check-line">
         <div>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>Straight answers from a 30-year industry veteran - not a sales script</span>
+          <span><strong>Your top readiness gaps</strong> - policies, training, site readiness, and enrollment</span>
         </div>
         <div>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>Your information stays private - see our <a href="/pages/privacy-policy" style="color: #7cefc4;">privacy policy</a></span>
+          <span><strong>What the 2026 rules mean for you</strong> - annual resurveys, new locations, ownership changes</span>
         </div>
+        <div>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>A straight answer on your timeline</strong> - and exactly what to fix first</span>
+        </div>
+      </div>
+
+      <div class="lp-authority">
+        <svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="22" fill="rgba(43,212,115,0.15)"/>
+          <path d="M14 24.5l7 7 13-15" stroke="#2bd473" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p><strong>Who you'll hear from:</strong> a DMEPOS industry veteran with 30+ years in supplier operations and compliance - not a call center, not a sales script. Your information stays private per our <a href="/pages/privacy-policy" style="color: #7cefc4;">privacy policy</a>.</p>
       </div>
     </div>
 
@@ -272,6 +350,11 @@
   </div>
 </section>
 
+<!-- Mobile sticky CTA: appears after scrolling past the hero, hides at the form -->
+<div class="lp-sticky-cta" id="lp-sticky-cta" aria-hidden="true">
+  <a href="#lead-form" class="btn btn--primary">Get My Free Readiness Review</a>
+</div>
+
 <script>
   // After a successful submit Shopify reloads the page; jump to the
   // thank-you card so the lead sees the booking CTA immediately, and
@@ -283,4 +366,25 @@
       sessionStorage.setItem('ama_lead_fired', '1');
     }
   }
+
+  // Mobile sticky CTA: show once the hero has scrolled away,
+  // hide while the lead form itself is on screen.
+  (function () {
+    var bar = document.getElementById('lp-sticky-cta');
+    var hero = document.querySelector('.lp-hero');
+    var formSection = document.getElementById('lead-form');
+    if (!bar || !hero || !formSection || !('IntersectionObserver' in window)) return;
+    var pastHero = false, formVisible = false;
+    var update = function () {
+      bar.classList.toggle('is-visible', pastHero && !formVisible);
+    };
+    new IntersectionObserver(function (entries) {
+      pastHero = !entries[0].isIntersecting;
+      update();
+    }).observe(hero);
+    new IntersectionObserver(function (entries) {
+      formVisible = entries[0].isIntersecting;
+      update();
+    }, { rootMargin: '0px 0px -30% 0px' }).observe(formSection);
+  })();
 </script>
