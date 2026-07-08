@@ -4,11 +4,11 @@
     <div class="hero-grid">
       <div>
         <span class="eyebrow" style="color: #12A5A0;">DMEPOS Compliance &amp; Accreditation Consulting</span>
-        <h1>{{ settings.hero_heading | default: 'Get accredited. Stay compliant. Keep billing.' }}</h1>
-        <p class="lede">{{ settings.hero_subheading }}</p>
+        <h1>{{ settings.hero_heading | default: 'Become survey-ready, enrollment-ready, and audit-defensible.' }}</h1>
+        <p class="lede">{{ settings.hero_subheading | default: 'We help DMEPOS suppliers fix compliance gaps, prepare for accreditation, review Medicare enrollment, and build policies that match real operations - without guesswork, last-minute scrambling, or generic templates.' }}</p>
         <div class="btn-row">
           {%- if settings.calendly_url != blank -%}
-            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
           {%- endif -%}
           <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline btn--lg">Shop Programs</a>
         </div>
@@ -25,6 +25,34 @@
   </div>
 </section>
 
+<!-- What changed in 2026 -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">What changed in 2026</span>
+    <h2>The rules got tougher. Readiness is now year-round.</h2>
+    <p class="lede">CMS finalized major changes to DMEPOS accreditation - and they raise the stakes for every supplier who bills Medicare.</p>
+    <div class="grid grid--3" style="margin-top: 1.8rem;">
+      <div class="card">
+        <h3>Annual reaccreditation</h3>
+        <p>The old three-year cycle is gone. DMEPOS suppliers now face annual resurveys and reaccreditation - which means your policies, training logs, and site readiness have to hold up every single year, not once every three.</p>
+      </div>
+      <div class="card">
+        <h3>New locations: survey first</h3>
+        <p>As of January 1, 2026, a new location must be surveyed before it's accredited. The old three-month grace period to operate while waiting for a site visit no longer exists.</p>
+      </div>
+      <div class="card">
+        <h3>Ownership changes don't transfer</h3>
+        <p>Accreditation does not automatically carry over after a merger, acquisition, or sale. Miss the required notifications to CMS and your accrediting organization, and billing privileges are at risk.</p>
+      </div>
+    </div>
+    <p style="margin-top: 1.8rem;">
+      {%- if settings.calendly_url != blank -%}
+        Not sure where you stand under the new rules? <a href="{{ settings.calendly_url }}" target="_blank" rel="noopener">Schedule a free readiness review →</a>
+      {%- endif -%}
+    </p>
+  </div>
+</section>
+
 <!-- How it works -->
 <section class="section section--soft">
   <div class="container">
@@ -33,8 +61,8 @@
     <div class="grid grid--3" style="margin-top: 1.8rem;">
       <div class="card">
         <div class="step-num">1</div>
-        <h3>Book a call</h3>
-        <p>A free consultation to understand your operation, your timeline, and which program fits - no pressure, no obligation.</p>
+        <h3>Schedule a readiness review</h3>
+        <p>A free review of where your operation stands: your timeline, your risk areas, and which program fits - no pressure, no obligation.</p>
       </div>
       <div class="card">
         <div class="step-num">2</div>
@@ -78,11 +106,11 @@
 <!-- CTA band -->
 <section class="section section--navy">
   <div class="container center">
-    <h2>Ready to get survey-ready?</h2>
-    <p class="lede" style="margin-inline: auto;">Book a free consultation. We'll talk through where your operation stands, what your survey timeline looks like, and exactly what it takes to get there.</p>
+    <h2>Get survey-ready before small gaps become big delays.</h2>
+    <p class="lede" style="margin-inline: auto;">A free readiness review shows you exactly where your operation stands, what your survey timeline looks like, and what it takes to close the gaps.</p>
     <div class="btn-row" style="justify-content: center;">
       {%- if settings.calendly_url != blank -%}
-        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
       {%- endif -%}
       {%- if settings.contact_email != blank -%}
         <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>

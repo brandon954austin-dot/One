@@ -8,21 +8,55 @@
     Clean SEO title: no stray quote marks, one canonical brand name.
     Shopify appends nothing - we control the full title here.
   {%- endcomment -%}
-  <title>
-    {%- if template == 'index' -%}
-      {{ shop.name }} - DMEPOS Compliance & Accreditation Consulting
-    {%- else -%}
-      {{ page_title | strip }} | {{ shop.name }}
-    {%- endif -%}
-  </title>
-
-  {%- if page_description -%}
-    <meta name="description" content="{{ page_description | escape }}">
+  {%- if template == 'index' -%}
+    {%- assign seo_title = shop.name | append: ' | DMEPOS Accreditation & Survey Readiness' -%}
   {%- else -%}
-    <meta name="description" content="Custom DMEPOS compliance programs, accreditation preparation, and implementation binder systems for durable medical equipment suppliers. 30+ years of industry experience.">
+    {%- assign seo_title = page_title | strip | append: ' | ' | append: shop.name -%}
+  {%- endif -%}
+  {%- if page_description != blank -%}
+    {%- assign seo_description = page_description | strip_html | truncate: 160 -%}
+  {%- else -%}
+    {%- assign seo_description = 'DMEPOS accreditation consulting: readiness reviews, CMS-855S enrollment support, corrective action help, and custom policy manuals. Become survey-ready, enrollment-ready, and audit-defensible.' -%}
   {%- endif -%}
 
+  <title>{{ seo_title }}</title>
+  <meta name="description" content="{{ seo_description | escape }}">
+
   <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- comment -%} Social sharing (Open Graph + Twitter) {%- endcomment -%}
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:title" content="{{ seo_title | escape }}">
+  <meta property="og:description" content="{{ seo_description | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {%- if template contains 'product' and product.featured_image -%}
+    <meta property="og:type" content="product">
+    <meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+  {%- else -%}
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ 'social-banner.png' | asset_url }}">
+  {%- endif -%}
+  <meta name="twitter:card" content="summary_large_image">
+
+  {%- comment -%} Organization structured data for search engines {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    "image": {{ 'social-banner.png' | asset_url | json }},
+    "description": "DMEPOS accreditation and compliance consulting for durable medical equipment suppliers: readiness reviews, CMS-855S enrollment support, corrective action plans, and custom policy and procedure manuals.",
+    {%- if settings.phone_tel != blank -%}
+    "telephone": {{ settings.phone_tel | json }},
+    {%- endif -%}
+    {%- if settings.contact_email != blank -%}
+    "email": {{ settings.contact_email | json }},
+    {%- endif -%}
+    "priceRange": "$$",
+    "knowsAbout": ["DMEPOS accreditation", "CMS-855S Medicare enrollment", "DMEPOS supplier standards", "corrective action plans", "annual reaccreditation", "compliance policy manuals"]
+  }
+  </script>
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
   <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">

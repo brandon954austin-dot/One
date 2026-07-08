@@ -52,7 +52,7 @@
         {%- if is_consult -%}
           <p>This program is custom-built for your operation, so it starts with a free consultation - not a checkout button. Fixed price, no hourly billing, printing and shipping included.</p>
           {%- if settings.calendly_url != blank -%}
-            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Book a Free Consultation</a>
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Schedule a Readiness Review</a>
           {%- endif -%}
           {%- if settings.phone_display != blank -%}
             <p style="margin-top: 1rem; margin-bottom: 0;">Or call <a href="tel:{{ settings.phone_tel }}">{{ settings.phone_display }}</a></p>
@@ -98,7 +98,7 @@
         {%- else -%}
           <p><strong>Currently unavailable.</strong></p>
           {%- if settings.contact_email != blank -%}
-            <a href="mailto:{{ settings.contact_email }}?subject=Availability%20question%20 - %20{{ product.title | url_encode }}" class="btn btn--outline btn--full">Ask about availability</a>
+            <a href="mailto:{{ settings.contact_email }}?subject=Availability%20question%20-%20{{ product.title | url_encode }}" class="btn btn--outline btn--full">Ask about availability</a>
           {%- endif -%}
         {%- endif -%}
       </aside>
@@ -112,7 +112,7 @@
     <p class="lede" style="margin-inline: auto;">Book a call or send a message - we'll give you a straight answer about whether it fits your situation.</p>
     <div class="btn-row" style="justify-content: center;">
       {%- if settings.calendly_url != blank -%}
-        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
       {%- endif -%}
       {%- if settings.contact_email != blank -%}
         <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>
@@ -120,3 +120,23 @@
     </div>
   </div>
 </section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | truncate: 300 | json }},
+  {%- if product.featured_image -%}
+  "image": "https:{{ product.featured_image | image_url: width: 1200 }}",
+  {%- endif -%}
+  "brand": { "@type": "Brand", "name": {{ shop.name | json }} },
+  "offers": {
+    "@type": "Offer",
+    "url": {{ shop.url | append: product.url | json }},
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "price": "{{ product.price | divided_by: 100.0 }}",
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+  }
+}
+</script>

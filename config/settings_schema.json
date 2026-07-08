@@ -65,13 +65,13 @@
         "type": "text",
         "id": "hero_heading",
         "label": "Hero heading",
-        "default": "Get accredited. Stay compliant. Keep billing."
+        "default": "Become survey-ready, enrollment-ready, and audit-defensible."
       },
       {
         "type": "textarea",
         "id": "hero_subheading",
         "label": "Hero subheading",
-        "default": "We build custom DMEPOS compliance programs and accreditation packages for medical equipment suppliers - written around your actual operation, professionally assembled, and shipped to your door survey-ready."
+        "default": "We help DMEPOS suppliers fix compliance gaps, prepare for accreditation, review Medicare enrollment, and build policies that match real operations - without guesswork, last-minute scrambling, or generic templates."
       }
     ]
   }
