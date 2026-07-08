@@ -1,5 +1,5 @@
 /**
- * AMA Quality Consulting — lead capture webhook.
+ * AMA Quality Consulting - lead capture webhook.
  *
  * Receives form submissions from the website (landing page and
  * contact page) and appends them as rows in this spreadsheet.
@@ -9,8 +9,8 @@
  * 2. In the sheet: Extensions → Apps Script. Delete any code there
  *    and paste this whole file. Save.
  * 3. Click Deploy → New deployment → type: Web app.
- *      - Execute as: Me
- *      - Who has access: Anyone
+ *     - Execute as: Me
+ *     - Who has access: Anyone
  *    Click Deploy and authorize when prompted.
  * 4. Copy the Web app URL (ends in /exec).
  * 5. In Shopify: Online Store → Customize → Theme settings →

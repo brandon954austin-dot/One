@@ -6,11 +6,11 @@
 
   {%- comment -%}
     Clean SEO title: no stray quote marks, one canonical brand name.
-    Shopify appends nothing — we control the full title here.
+    Shopify appends nothing - we control the full title here.
   {%- endcomment -%}
   <title>
     {%- if template == 'index' -%}
-      {{ shop.name }} — DMEPOS Compliance & Accreditation Consulting
+      {{ shop.name }} - DMEPOS Compliance & Accreditation Consulting
     {%- else -%}
       {{ page_title | strip }} | {{ shop.name }}
     {%- endif -%}
@@ -34,7 +34,7 @@
 
   <header class="site-header">
     <div class="container site-header__inner">
-      <a href="{{ routes.root_url }}" class="brand" aria-label="{{ shop.name }} — home">
+      <a href="{{ routes.root_url }}" class="brand" aria-label="{{ shop.name }} - home">
         <svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true">
           <defs>
             <linearGradient id="amaNavy" x1="12" y1="14" x2="18" y2="32" gradientUnits="userSpaceOnUse">
@@ -87,7 +87,7 @@
       <div class="footer-grid">
         <div>
           <h4>{{ shop.name }}</h4>
-          <p>Custom DMEPOS compliance programs, accreditation preparation, and implementation systems — built on 30+ years of industry experience.</p>
+          <p>Custom DMEPOS compliance programs, accreditation preparation, and implementation systems - built on 30+ years of industry experience.</p>
         </div>
         <div>
           <h4>Navigate</h4>

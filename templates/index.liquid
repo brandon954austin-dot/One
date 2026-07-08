@@ -1,18 +1,25 @@
 <!-- Hero -->
 <section class="hero">
   <div class="container">
-    <span class="eyebrow" style="color: #12A5A0;">DMEPOS Compliance &amp; Accreditation Consulting</span>
-    <h1>{{ settings.hero_heading | default: 'Get accredited. Stay compliant. Keep billing.' }}</h1>
-    <p class="lede">{{ settings.hero_subheading }}</p>
-    <div class="btn-row">
-      {%- if settings.calendly_url != blank -%}
-        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>
-      {%- endif -%}
-      <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline btn--lg">Shop Programs</a>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow" style="color: #12A5A0;">DMEPOS Compliance &amp; Accreditation Consulting</span>
+        <h1>{{ settings.hero_heading | default: 'Get accredited. Stay compliant. Keep billing.' }}</h1>
+        <p class="lede">{{ settings.hero_subheading }}</p>
+        <div class="btn-row">
+          {%- if settings.calendly_url != blank -%}
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>
+          {%- endif -%}
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline btn--lg">Shop Programs</a>
+        </div>
+      </div>
+      <div class="hero-scene" aria-hidden="true">
+        {% render 'illus-binder' %}
+      </div>
     </div>
     <div class="trust-strip">
       <div><strong>30+ years</strong> DMEPOS industry experience</div>
-      <div><strong>100% custom</strong> flagship programs — never a template</div>
+      <div><strong>100% custom</strong> flagship programs - never a template</div>
       <div><strong>Delivered done</strong> printed, assembled &amp; shipped to you</div>
     </div>
   </div>
@@ -27,7 +34,7 @@
       <div class="card">
         <div class="step-num">1</div>
         <h3>Book a call</h3>
-        <p>A free consultation to understand your operation, your timeline, and which program fits — no pressure, no obligation.</p>
+        <p>A free consultation to understand your operation, your timeline, and which program fits - no pressure, no obligation.</p>
       </div>
       <div class="card">
         <div class="step-num">2</div>
@@ -37,7 +44,7 @@
       <div class="card">
         <div class="step-num">3</div>
         <h3>Receive your program</h3>
-        <p>Written, professionally printed, assembled, and shipped to your location — ready for the surveyor to open.</p>
+        <p>Written, professionally printed, assembled, and shipped to your location - ready for the surveyor to open.</p>
       </div>
     </div>
   </div>
@@ -58,7 +65,7 @@
       {%- for product in featured.products limit: 6 -%}
         {% render 'product-card', product: product %}
       {%- else -%}
-        <p>No products yet — add products in your Shopify admin and they'll appear here.</p>
+        <p>No products yet - add products in your Shopify admin and they'll appear here.</p>
       {%- endfor -%}
     </div>
 

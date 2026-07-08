@@ -1,11 +1,11 @@
 {%- comment -%}
   Product page with two modes:
 
-  1. Default — full click-to-buy: variant picker, quantity, Add to Cart,
+  1. Default - full click-to-buy: variant picker, quantity, Add to Cart,
      and Shopify's dynamic "Buy it now" button (straight to checkout).
 
   2. Tag a product "consult" in the Shopify admin and the buy buttons are
-     replaced with a Book a Call CTA — for flagship custom programs that
+     replaced with a Book a Call CTA - for flagship custom programs that
      should start with a conversation instead of a checkout.
      Remove the tag and it becomes instantly buyable again.
 {%- endcomment -%}
@@ -50,7 +50,7 @@
         </div>
 
         {%- if is_consult -%}
-          <p>This program is custom-built for your operation, so it starts with a free consultation — not a checkout button. Fixed price, no hourly billing, printing and shipping included.</p>
+          <p>This program is custom-built for your operation, so it starts with a free consultation - not a checkout button. Fixed price, no hourly billing, printing and shipping included.</p>
           {%- if settings.calendly_url != blank -%}
             <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Book a Free Consultation</a>
           {%- endif -%}
@@ -69,7 +69,7 @@
                     {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
                     {% unless variant.available %}disabled{% endunless %}
                   >
-                    {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} (sold out){% endunless %}
+                    {{ variant.title }} - {{ variant.price | money }}{% unless variant.available %} (sold out){% endunless %}
                   </option>
                 {%- endfor -%}
               </select>
@@ -98,7 +98,7 @@
         {%- else -%}
           <p><strong>Currently unavailable.</strong></p>
           {%- if settings.contact_email != blank -%}
-            <a href="mailto:{{ settings.contact_email }}?subject=Availability%20question%20—%20{{ product.title | url_encode }}" class="btn btn--outline btn--full">Ask about availability</a>
+            <a href="mailto:{{ settings.contact_email }}?subject=Availability%20question%20 - %20{{ product.title | url_encode }}" class="btn btn--outline btn--full">Ask about availability</a>
           {%- endif -%}
         {%- endif -%}
       </aside>
@@ -109,7 +109,7 @@
 <section class="section section--navy">
   <div class="container center">
     <h2>Questions about this program?</h2>
-    <p class="lede" style="margin-inline: auto;">Book a call or send a message — we'll give you a straight answer about whether it fits your situation.</p>
+    <p class="lede" style="margin-inline: auto;">Book a call or send a message - we'll give you a straight answer about whether it fits your situation.</p>
     <div class="btn-row" style="justify-content: center;">
       {%- if settings.calendly_url != blank -%}
         <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Book a Free Consultation</a>

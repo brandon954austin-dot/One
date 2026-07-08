@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   AMA Quality Consulting — Shopify theme styles
+   AMA Quality Consulting - Shopify theme styles
    Navy/teal brand system, AA+ contrast.
    ───────────────────────────────────────────────────────────── */
 
@@ -137,6 +137,10 @@ img, svg { max-width: 100%; height: auto; }
 }
 .hero h1 { color: #fff; max-width: 17ch; }
 .hero .lede { color: #c3d2e2; }
+.hero-grid { display: grid; gap: 2.5rem; align-items: center; }
+@media (min-width: 920px) { .hero-grid { grid-template-columns: 1.15fr 0.85fr; } }
+.hero-scene { display: flex; justify-content: center; }
+.hero-scene svg { width: 100%; max-width: 430px; height: auto; filter: drop-shadow(0 24px 40px rgba(2, 8, 20, 0.45)); }
 .trust-strip {
   display: flex; flex-wrap: wrap; gap: 1.1rem 2.4rem;
   margin-top: 2.2rem; padding-top: 1.5rem;
@@ -155,7 +159,7 @@ img, svg { max-width: 100%; height: auto; }
 .grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
 .grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); }
 
-/* Product cards — one clean price, no theme-bug duplicates */
+/* Product cards - one clean price, no theme-bug duplicates */
 .product-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
 .product-card:hover h3 { color: var(--teal-600); }
 .product-card__img {

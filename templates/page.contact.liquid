@@ -12,7 +12,7 @@
     {%- if page.content != blank -%}
       <div class="prose">{{ page.content }}</div>
     {%- else -%}
-      <p class="lede">Question about a program, your survey timeline, or whether we're a fit? Send a message — we respond within one business day.</p>
+      <p class="lede">Question about a program, your survey timeline, or whether we're a fit? Send a message - we respond within one business day.</p>
     {%- endif -%}
 
     <div class="grid grid--2" style="margin-top: 2rem; align-items: start;">
@@ -20,7 +20,7 @@
         {% form 'contact' %}
           {%- if form.posted_successfully? -%}
             <p style="background: var(--teal-50); border: 1px solid var(--teal-100); border-radius: var(--radius); padding: 0.8rem 1.1rem;">
-              Thanks — your message has been sent. We'll get back to you within one business day.
+              Thanks - your message has been sent. We'll get back to you within one business day.
             </p>
           {%- endif -%}
           {%- if form.errors -%}
@@ -61,8 +61,11 @@
 
       <div>
         <div class="card" style="margin-bottom: 1.4rem;">
+          <div aria-hidden="true" style="margin-bottom: 1rem;">
+            {% render 'illus-call' %}
+          </div>
           <h3>Prefer to talk?</h3>
-          <p style="color: var(--ink-soft);">The fastest path is a scheduled call — pick a time that works and we'll call you.</p>
+          <p style="color: var(--ink-soft);">The fastest path is a scheduled call - pick a time that works and we'll call you.</p>
           {%- if settings.calendly_url != blank -%}
             <a href="{{ settings.calendly_url }}" class="btn btn--primary" target="_blank" rel="noopener">Book a Call</a>
           {%- endif -%}

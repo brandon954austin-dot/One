@@ -4,8 +4,15 @@
     <h1>Your cart</h1>
 
     {%- if cart.item_count == 0 -%}
-      <p class="lede">Your cart is empty.</p>
-      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary btn--lg">Browse programs</a>
+      <div class="grid grid--2" style="align-items: center; margin-top: 1rem;">
+        <div>
+          <p class="lede">Your cart is empty.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary btn--lg">Browse programs</a>
+        </div>
+        <div aria-hidden="true" style="max-width: 380px;">
+          {% render 'illus-binder' %}
+        </div>
+      </div>
     {%- else -%}
       <form action="{{ routes.cart_url }}" method="post" novalidate>
         <table class="cart-table">
