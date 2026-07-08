@@ -44,6 +44,12 @@
         "id": "meta_pixel_id",
         "label": "Meta Pixel ID",
         "info": "Numeric Pixel ID from Meta Events Manager. When set, the Pixel loads on every page and lead-form submissions fire a Lead event."
+      },
+      {
+        "type": "text",
+        "id": "lead_sheet_webhook",
+        "label": "Google Sheet webhook URL",
+        "info": "Google Apps Script web app URL (ends in /exec). When set, every contact and lead form submission is also added as a row in your Google Sheet. Setup instructions: docs/google-sheets-lead-webhook.gs in the theme repository."
       }
     ]
   },

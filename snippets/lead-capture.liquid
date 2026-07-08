@@ -1,0 +1,34 @@
+{%- comment -%}
+  Mirrors contact/lead form submissions to a Google Sheet via a
+  Google Apps Script web app. Set the deployed script URL in
+  Theme settings → Tracking → "Google Sheet webhook URL".
+  Uses sendBeacon so the request survives the page navigating
+  to Shopify's own form handler. Include before </body>.
+{%- endcomment -%}
+{%- if settings.lead_sheet_webhook != blank -%}
+<script>
+(function () {
+  var endpoint = {{ settings.lead_sheet_webhook | json }};
+  document.addEventListener('submit', function (e) {
+    var form = e.target;
+    if (!form.action || form.action.indexOf('/contact') === -1) return;
+    var fields = {
+      'contact[name]': 'name',
+      'contact[business_name]': 'business_name',
+      'contact[email]': 'email',
+      'contact[phone]': 'phone',
+      'contact[supplier_status]': 'supplier_status',
+      'contact[body]': 'message'
+    };
+    var body = new URLSearchParams();
+    body.append('page', document.title);
+    body.append('url', window.location.pathname);
+    for (var key in fields) {
+      var el = form.elements[key];
+      if (el && el.value) body.append(fields[key], el.value);
+    }
+    if (body.get('email')) navigator.sendBeacon(endpoint, body);
+  }, true);
+})();
+</script>
+{%- endif -%}
