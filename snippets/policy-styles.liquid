@@ -1,0 +1,36 @@
+{%- comment -%}
+  Shared styles for policy pages (privacy, refund). Include once per page.
+{%- endcomment -%}
+<style>
+  .pp-band { background: linear-gradient(160deg, var(--navy-900), var(--navy-950)); color: #e8eef5; padding-block: clamp(2.4rem, 5vw, 3.6rem); }
+  .pp-band h1 { color: #fff; margin-bottom: 0.4rem; }
+  .pp-meta { color: #b9c6d6; font-size: 0.95rem; margin: 0; }
+  .pp-fill { background: #fff3d6; color: #8a5a00; padding: 1px 7px; border-radius: 5px; font-weight: 600; white-space: nowrap; }
+  .pp-band .pp-fill { background: rgba(18, 165, 160, 0.18); color: #7cefc4; }
+
+  .pp-wrap { display: grid; grid-template-columns: 220px 1fr; gap: 3rem; align-items: start; padding-block: 2.5rem 4.5rem; }
+  .pp-toc { position: sticky; top: 5.5rem; }
+  .pp-toc-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.75rem; }
+  .pp-toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+  .pp-toc li a { display: block; padding: 0.42rem 0 0.42rem 0.85rem; margin-left: -2px; border-left: 2px solid transparent; color: var(--ink-soft); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+  .pp-toc li a:hover { color: var(--navy-900); border-left-color: var(--teal-500); }
+
+  .pp-item { margin-bottom: 2.3rem; scroll-margin-top: 6rem; }
+  .pp-item-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.7rem; }
+  .pp-badge { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--teal-500); color: var(--navy-900); display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+  .pp-item h2 { font-size: 1.15rem; margin: 0; }
+  .pp-item-body { padding-left: 2.5rem; font-size: 0.97rem; }
+  .pp-item-body p { margin: 0 0 0.75rem; }
+  .pp-item-body ul { margin: 0 0 0.75rem; padding-left: 1.25rem; }
+  .pp-item-body li { margin-bottom: 0.4rem; }
+  .pp-contact { font-style: normal; padding-left: 2.5rem; font-size: 0.97rem; line-height: 1.8; }
+  .pp-intro { font-size: 1.02rem; margin-bottom: 2.4rem; }
+
+  @media (max-width: 720px) {
+    .pp-wrap { grid-template-columns: 1fr; gap: 0.5rem; }
+    .pp-toc { position: static; }
+    .pp-toc ol { border-left: none; display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; }
+    .pp-toc li a { padding: 0.25rem 0; border-left: none; }
+    .pp-item-body, .pp-contact { padding-left: 0; }
+  }
+</style>

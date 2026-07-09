@@ -1,0 +1,164 @@
+{%- comment -%}
+  Med Spa Compliance Program service page. Assign in the Shopify admin:
+  Online Store → Pages → (Med Spa page) → Theme template → "page.medspa".
+  Content from the owner's program one-pager; gold accents echo the
+  physical binder system's luxe design direction.
+{%- endcomment -%}
+
+<style>
+  .ms-gold { color: #d4af5f; }
+  .ms-hero {
+    background:
+      radial-gradient(900px 480px at 88% -8%, rgba(212, 175, 95, 0.14), transparent 60%),
+      radial-gradient(700px 420px at -10% 110%, rgba(47, 69, 240, 0.18), transparent 55%),
+      linear-gradient(160deg, var(--navy-900), var(--navy-950));
+    color: #e8eef5;
+    padding-block: clamp(3rem, 7vw, 5rem);
+  }
+  .ms-hero h1 { color: #fff; max-width: 22ch; }
+  .ms-hero .lede { color: #c3d2e2; }
+  .ms-hero .btn--outline { color: #fff; border-color: #fff; }
+  .ms-hero .btn--outline:hover { background: #fff; color: var(--navy-900); }
+  .ms-kicker {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(212, 175, 95, 0.13); border: 1px solid rgba(212, 175, 95, 0.4);
+    color: #e8c98a; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 99px; margin-bottom: 1.1rem;
+  }
+  .ms-binder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 0.6rem 1.6rem; margin-top: 1.8rem; }
+  .ms-binder-grid div { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.98rem; }
+  .ms-binder-grid svg { flex-shrink: 0; margin-top: 0.2em; }
+  .ms-why .card { border-top: 4px solid #d4af5f; }
+  .ms-count {
+    font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 800; line-height: 1;
+    color: var(--navy-900);
+  }
+</style>
+
+<!-- ============ HERO ============ -->
+<section class="ms-hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="ms-kicker">New service · Medical aesthetics</span>
+        <h1>The Complete Med Spa Policy &amp; Procedure Compliance Program</h1>
+        <p class="lede">Everything your medical spa needs to operate safely, legally, and confidently - professionally built, customized for medical aesthetic practices, and ready to use on day one.</p>
+        <div class="btn-row">
+          {%- if settings.calendly_url != blank -%}
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Med Spa Compliance Review</a>
+          {%- endif -%}
+          <a href="/pages/contact" class="btn btn--outline btn--lg">Ask a Question</a>
+        </div>
+      </div>
+      <div class="hero-scene" aria-hidden="true">
+        {% render 'illus-binder' %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="section">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Is your med spa truly compliant?</span>
+    <h2>One gap in your documentation can mean fines, license suspension, or patient harm.</h2>
+    <p class="lede">Running a medical spa means navigating a complex web of state regulations, federal requirements, OSHA standards, HIPAA rules, laser safety protocols, and medical director oversight mandates. Most med spa owners don't have the time - or the regulatory expertise - to build airtight compliance programs from scratch.</p>
+    <p class="lede">That's exactly why we built this: a turnkey compliance system covering every critical area of operations, safety, and regulatory accountability.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT'S INCLUDED ============ -->
+<section class="section section--soft">
+  <div class="container">
+    <div class="grid grid--2" style="align-items: center; margin-bottom: 1rem;">
+      <div>
+        <span class="eyebrow">What's included</span>
+        <h2>22 complete program binders</h2>
+        <p class="lede">Each binder contains professionally written policies, standard operating procedures, forms, and supporting documentation - ready to implement on day one.</p>
+      </div>
+      <div style="text-align: center;" aria-hidden="true">
+        <div class="ms-count">22</div>
+        <p style="color: var(--ink-soft); margin: 0;">binders. One complete program.</p>
+      </div>
+    </div>
+    <div class="ms-binder-grid">
+      {%- assign binders = "The Aesthetic Label Policy & Procedure Manual / SOPs, Safety Data Sheet, Employee Handbook with New Hire Packet, HIPAA Privacy & Security, Quality Assurance & Compliance Program Oversight, General Safety Program, Adverse Events & Incident Reporting, Business Records, Laser & Energy Device Safety, Temperature Log, Chart Audit Compliance, Equipment & Preventive Maintenance, State Regulatory Licensure, Staff Training & Credentials, Patient Complaint & Risk Management, Controlled Substance & Medication Management, Medical Director Oversight & Delegation, Bloodborne Pathogens & Infection Control, OSHA General Compliance, Operational Forms for Entire Program, SDS & Hazard Communication, Final Consents & Patient Forms" | split: ", " -%}
+      {%- for binder in binders -%}
+        <div>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(212,175,95,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#b8923f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>{{ binder }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY IT MATTERS ============ -->
+<section class="section ms-why">
+  <div class="container">
+    <span class="eyebrow">Why this program matters</span>
+    <h2>Documentation is the first thing they look at.</h2>
+    <div class="grid grid--2" style="margin-top: 1.8rem;">
+      <div class="card">
+        <h3>Protect your license &amp; business</h3>
+        <p>State inspectors, accreditation bodies, and malpractice attorneys all look at your documentation first. A complete compliance program demonstrates that your practice operates to the highest standard of care.</p>
+      </div>
+      <div class="card">
+        <h3>Laser &amp; device safety done right</h3>
+        <p>Energy-based device protocols are among the most scrutinized areas in med spa compliance. The Laser and Energy Device Safety binder gives your team the SOPs and training documentation to operate confidently and safely.</p>
+      </div>
+      <div class="card">
+        <h3>Medical director oversight - covered</h3>
+        <p>Proper medical director oversight and delegation documentation is legally required in most states. A dedicated binder ensures your oversight structure is fully documented and defensible.</p>
+      </div>
+      <div class="card">
+        <h3>HIPAA, OSHA &amp; infection control</h3>
+        <p>Federal compliance requirements don't pause for busy practices. The HIPAA, OSHA, Bloodborne Pathogens, and Infection Control binders keep you audit-ready every day - without the guesswork.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO IT'S FOR ============ -->
+<section class="section section--soft">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Built for owners who take compliance seriously</span>
+    <h2>Is this program for you?</h2>
+    <ul class="checklist" style="margin-top: 1.6rem; font-size: 1.05rem;">
+      <li><strong>New med spa owners</strong> who need a complete compliance foundation from day one</li>
+      <li><strong>Established practices</strong> that need to fill documentation gaps before an inspection</li>
+      <li><strong>Multi-location operators</strong> standardizing compliance across all sites</li>
+      <li><strong>Practices adding laser or energy-based devices</strong> to their service menu</li>
+      <li><strong>Owners transitioning to a new medical director</strong> and needing updated oversight documentation</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section section--navy">
+  <div class="container center">
+    <h2>Ready to protect your practice?</h2>
+    <p class="lede" style="margin-inline: auto;">Stop guessing. Stop worrying. Stop putting your license at risk with incomplete documentation. Get a professionally built, ready-to-implement compliance system - so you can focus on delivering exceptional patient care.</p>
+    <div class="btn-row" style="justify-content: center;">
+      {%- if settings.calendly_url != blank -%}
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Med Spa Compliance Review</a>
+      {%- endif -%}
+      {%- if settings.contact_email != blank -%}
+        <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>
+      {%- endif -%}
+    </div>
+    <p style="margin-top: 1.6rem; color: #c3d2e2; font-size: 0.95rem;">Your compliance. Our expertise. Your peace of mind.<br>Serving medical aesthetic practices nationwide.</p>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Med Spa Policy & Procedure Compliance Program",
+  "serviceType": "Medical spa compliance consulting",
+  "provider": { "@type": "ProfessionalService", "name": {{ shop.name | json }}, "url": {{ shop.url | json }} },
+  "areaServed": "United States",
+  "description": "Turnkey med spa compliance system with 22 program binders covering HIPAA, OSHA, laser and energy device safety, medical director oversight, infection control, staff training, and state regulatory licensure - professionally written and ready to implement."
+}
+</script>
