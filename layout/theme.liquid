@@ -69,7 +69,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="{{ routes.root_url }}" class="brand" aria-label="{{ shop.name }} - home">
-        <svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg class="brand__mark" width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true">
           <defs>
             <linearGradient id="amaNavy" x1="12" y1="14" x2="18" y2="32" gradientUnits="userSpaceOnUse">
               <stop offset="0" stop-color="#10154f"/>
@@ -89,7 +89,7 @@
           <path d="M20.5 16 L20 23" stroke="url(#amaBlue)" stroke-width="12.5" stroke-linecap="round"/>
           <path d="M33.5 13 L19.5 31.5" stroke="url(#amaGreen)" stroke-width="13" stroke-linecap="round"/>
         </svg>
-        <span>{{ shop.name }}</span>
+        <span class="brand__name"><b>AMA</b><span>Quality Consulting</span></span>
       </a>
 
       <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">
@@ -99,15 +99,35 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-        {%- for link in linklists.main-menu.links -%}
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        {%- endfor -%}
-        <a href="{{ routes.cart_url }}" class="cart-link">
-          Cart{% if cart.item_count > 0 %} <span class="cart-count">{{ cart.item_count }}</span>{% endif %}
-        </a>
-        {%- if settings.calendly_url != blank -%}
-          <a href="{{ settings.calendly_url }}" class="btn btn--primary" target="_blank" rel="noopener">Book a Call</a>
-        {%- endif -%}
+        <ul class="site-nav__list">
+          {%- for link in linklists.main-menu.links -%}
+            {%- if link.links != blank -%}
+              <li class="has-dropdown"{% if link.child_active %} aria-current="true"{% endif %}>
+                <button type="button" class="site-nav__link" aria-expanded="false">
+                  {{ link.title }}
+                  <svg class="site-nav__chevron" width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <ul class="dropdown">
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}"{% if child.active %} aria-current="page"{% endif %}>{{ child.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </li>
+            {%- else -%}
+              <li><a href="{{ link.url }}" class="site-nav__link"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        <div class="site-nav__actions">
+          <a href="{{ routes.cart_url }}" class="cart-link" aria-label="Cart{% if cart.item_count > 0 %}, {{ cart.item_count }} item{{ cart.item_count | pluralize: '', 's' }}{% endif %}">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7h14l-1 11a2 2 0 0 1-2 1.8H8A2 2 0 0 1 6 18L5 7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 7a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            {%- if cart.item_count > 0 -%}<span class="cart-count">{{ cart.item_count }}</span>{%- endif -%}
+          </a>
+          {%- if settings.calendly_url != blank -%}
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary" target="_blank" rel="noopener">Book a Call</a>
+          {%- endif -%}
+        </div>
       </nav>
     </div>
   </header>
@@ -164,6 +184,17 @@
           toggle.setAttribute('aria-expanded', String(open));
         });
       }
+      // Dropdown parents: click toggles on touch/mobile; hover/focus handles desktop via CSS.
+      var isMobile = function () { return window.matchMedia('(max-width: 900px)').matches; };
+      document.querySelectorAll('.has-dropdown > .site-nav__link').forEach(function (btn) {
+        var li = btn.parentElement;
+        btn.addEventListener('click', function (e) {
+          if (!isMobile() && !('ontouchstart' in window)) return;
+          e.preventDefault();
+          var open = li.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', String(open));
+        });
+      });
     })();
   </script>
 </body>
