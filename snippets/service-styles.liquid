@@ -1,0 +1,45 @@
+{%- comment -%}
+  Shared styles for scope-of-service pages (DMEPOS, home health,
+  pharmacy, physician office, med spa). Include once per service page.
+  Accent defaults to brand teal; a page can override --svc-accent.
+{%- endcomment -%}
+<style>
+  .svc-page { --svc-accent: #12a5a0; --svc-accent-soft: rgba(18, 165, 160, 0.14); --svc-accent-ink: #0e7c7b; }
+  .svc-hero {
+    background:
+      radial-gradient(900px 480px at 88% -8%, rgba(43, 212, 115, 0.16), transparent 60%),
+      radial-gradient(700px 420px at -10% 110%, rgba(47, 69, 240, 0.20), transparent 55%),
+      linear-gradient(160deg, var(--navy-900), var(--navy-950));
+    color: #e8eef5; padding-block: clamp(3rem, 7vw, 5rem);
+  }
+  .svc-hero h1 { color: #fff; max-width: 22ch; }
+  .svc-hero .lede { color: #c3d2e2; }
+  .svc-hero .btn--outline { color: #fff; border-color: #fff; }
+  .svc-hero .btn--outline:hover { background: #fff; color: var(--navy-900); }
+  .svc-kicker {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--svc-accent-soft); border: 1px solid var(--svc-accent);
+    color: #7cefc4; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 99px; margin-bottom: 1.1rem;
+  }
+  .svc-components-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 0.55rem 1.6rem; margin-top: 1.8rem; }
+  .svc-components-grid div { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.97rem; }
+  .svc-components-grid svg { flex-shrink: 0; margin-top: 0.2em; }
+  .svc-why .card { border-top: 4px solid var(--svc-accent); }
+  .svc-count { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 800; line-height: 1; color: var(--navy-900); }
+
+  /* Monthly consulting package tiers */
+  .svc-pricing { display: grid; gap: 1.4rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); margin-top: 1.9rem; align-items: start; }
+  .svc-tier { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow-card); display: flex; flex-direction: column; }
+  .svc-tier--pop { border: 2px solid var(--svc-accent); box-shadow: 0 16px 40px rgba(11, 37, 69, 0.14); }
+  .svc-tier__badge { align-self: flex-start; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--svc-accent-ink); background: var(--svc-accent-soft); border-radius: 99px; padding: 0.2rem 0.7rem; margin-bottom: 0.7rem; }
+  .svc-tier__name { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .svc-tier__tag { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 0.9rem; }
+  .svc-price { font-size: 2rem; font-weight: 800; color: var(--navy-900); line-height: 1; }
+  .svc-price span { font-size: 0.95rem; font-weight: 500; color: var(--ink-soft); }
+  .svc-tier ul { list-style: none; padding: 0; margin: 1.1rem 0 1.4rem; }
+  .svc-tier li { position: relative; padding-left: 1.7rem; margin-bottom: 0.55rem; font-size: 0.94rem; }
+  .svc-tier li::before { content: ""; position: absolute; left: 0; top: 0.28em; width: 1.05rem; height: 1.05rem; border-radius: 50%; background: var(--svc-accent-soft) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="none" stroke="%230e7c7b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M3.5 8.5l3 3 6-7"/></svg>') center/68% no-repeat; }
+  .svc-tier .btn { margin-top: auto; }
+  .svc-note { background: var(--bg-soft); border-left: 4px solid var(--svc-accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 1rem 1.3rem; font-size: 0.95rem; color: var(--ink-soft); }
+</style>

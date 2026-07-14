@@ -1,0 +1,130 @@
+{%- comment -%}
+  DMEPOS scope-of-service page. Assign in the Shopify admin:
+  Online Store → Pages → (DMEPOS page) → Theme template → "page.dmepos".
+{%- endcomment -%}
+{% render 'service-styles' %}
+<div class="svc-page">
+
+<section class="svc-hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="svc-kicker">Scope of service · DMEPOS</span>
+        <h1>The Complete DMEPOS Policy &amp; Procedure Compliance Program</h1>
+        <p class="lede">Everything your DMEPOS supplier needs to operate compliantly, pass audits, and protect your accreditation - professionally built and ready to use.</p>
+        <div class="btn-row">
+          {%- if settings.calendly_url != blank -%}
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
+          {%- endif -%}
+          <a href="/pages/contact" class="btn btn--outline btn--lg">Ask a Question</a>
+        </div>
+      </div>
+      <div class="hero-scene" aria-hidden="true">{% render 'illus-binder' %}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Is your DMEPOS operation audit-ready?</span>
+    <h2>A single failed audit can trigger recoupment, billing suspension, or the loss of your Medicare supplier number.</h2>
+    <p class="lede">DMEPOS suppliers operate under some of the most rigorous compliance requirements in healthcare - CMS regulations, accreditation standards, OIG oversight, fraud-waste-and-abuse mandates, and state licensing. The documentation burden is enormous, and most suppliers don't have time to build a compliant system from scratch.</p>
+    <p class="lede">The AMA Quality Consulting DMEPOS Compliance Program is a professionally developed, customized system covering every operational, clinical, regulatory, and administrative area your business requires.</p>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="grid grid--2" style="align-items: center; margin-bottom: 1rem;">
+      <div>
+        <span class="eyebrow">What's included</span>
+        <h2>26 complete program components</h2>
+        <p class="lede">Each component contains professionally written policies, procedures, logs, forms, and supporting documentation - ready to implement from day one.</p>
+      </div>
+      <div style="text-align: center;" aria-hidden="true">
+        <div class="svc-count">26</div>
+        <p style="color: var(--ink-soft); margin: 0;">components. One complete program.</p>
+      </div>
+    </div>
+    <div class="svc-components-grid">
+      {%- assign items = "Master DMEPOS Policy & Procedure Manual (8 Chapters), Employee Handbook, Safety Reports, Patient Education Sheets, Infection Control Program, Equipment Tracking Binder, Staff Training Program, SDS (MSDS) Binder, Patient Complaint Program, Sample Patient File, After Hour Calls, Sample New Patient Packet, Emergency Preparedness, Sample Employee File, Corporate Compliance - FWA, Patient Info Wall Postings, New Patient Log, Chart Audit, Performance Improvement, Business Binder, Product Return Log, OIG Screening Records Binder, Expected / Unexpected Denial Log, Physician Verification Binder, Patient Surveys, Equipment Delivery Procedures" | split: ", " -%}
+      {%- for item in items -%}
+        <div>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(18,165,160,0.16)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#0e7c7b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>{{ item }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="section svc-why">
+  <div class="container">
+    <span class="eyebrow">Why this program matters</span>
+    <h2>Built where the auditors look first.</h2>
+    <div class="grid grid--2" style="margin-top: 1.8rem;">
+      <div class="card">
+        <h3>Master P&amp;P manual - 8 chapters</h3>
+        <p>Your foundational manual covers every facet of DMEPOS operations across eight chapters - from equipment management and delivery to patient intake and billing compliance. It's the backbone of your entire program.</p>
+      </div>
+      <div class="card">
+        <h3>Corporate compliance &amp; FWA</h3>
+        <p>CMS and accreditation bodies require a documented Fraud, Waste, and Abuse program. You get a complete, audit-ready FWA program with the policies, training documentation, and OIG screening records to back it up.</p>
+      </div>
+      <div class="card">
+        <h3>Chart audit &amp; denial management</h3>
+        <p>A built-in Chart Audit component and an Expected/Unexpected Denial Log help you identify documentation gaps before an auditor does - and track denial patterns to protect your revenue.</p>
+      </div>
+      <div class="card">
+        <h3>Equipment delivery &amp; tracking</h3>
+        <p>Delivery documentation is one of the most common DMEPOS audit failure points. The Equipment Delivery Procedures and Equipment Tracking Binder ensure every delivery is documented correctly, every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Built for suppliers who can't afford to fail an audit</span>
+    <h2>Is this program for you?</h2>
+    <ul class="checklist" style="margin-top: 1.6rem; font-size: 1.05rem;">
+      <li><strong>New DMEPOS suppliers</strong> applying for accreditation and a Medicare supplier number</li>
+      <li><strong>Established suppliers</strong> preparing for re-accreditation surveys or CMS audits</li>
+      <li><strong>Suppliers facing a ZPIC, RAC, or MAC audit request</strong> who need to get compliant fast</li>
+      <li><strong>Multi-location operations</strong> standardizing policies and procedures across all sites</li>
+      <li><strong>Any supplier</strong> who wants to stop guessing and start operating with confidence</li>
+    </ul>
+  </div>
+</section>
+
+{% render 'service-packages', scope: 'DMEPOS', audience: 'supplier' %}
+
+<section class="section section--navy">
+  <div class="container center">
+    <h2>Ready to protect your DMEPOS business?</h2>
+    <p class="lede" style="margin-inline: auto;">We'll review your current operations, identify any gaps, and match you to the level of support that fits your practice, your budget, and your goals.</p>
+    <div class="btn-row" style="justify-content: center;">
+      {%- if settings.calendly_url != blank -%}
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
+      {%- endif -%}
+      {%- if settings.contact_email != blank -%}
+        <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>
+      {%- endif -%}
+    </div>
+    <p style="margin-top: 1.6rem; color: #c3d2e2; font-size: 0.95rem;">Your compliance. Our expertise. Your peace of mind.<br>Serving DMEPOS suppliers nationwide.</p>
+  </div>
+</section>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "DMEPOS Policy & Procedure Compliance Program",
+  "serviceType": "DMEPOS accreditation and compliance consulting",
+  "provider": { "@type": "ProfessionalService", "name": {{ shop.name | json }}, "url": {{ shop.url | json }} },
+  "areaServed": "United States",
+  "description": "Turnkey DMEPOS compliance system with 26 program components covering the master P&P manual, corporate compliance and FWA, chart audit, denial management, equipment delivery and tracking, plus monthly consulting packages from $850/month."
+}
+</script>

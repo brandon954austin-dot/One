@@ -1,0 +1,72 @@
+{%- comment -%}
+  Shared monthly consulting packages section for scope-of-service pages.
+  Usage: {% render 'service-packages', scope: 'DMEPOS', audience: 'supplier' %}
+  - scope:    short label used in reporting-review copy (e.g. "DMEPOS", "home health")
+  - audience: noun for the org (e.g. "supplier", "agency", "pharmacy", "practice")
+{%- endcomment -%}
+{%- assign scope = scope | default: 'compliance' -%}
+{%- assign audience = audience | default: 'organization' -%}
+
+<section class="section section--soft">
+  <div class="container">
+    <span class="eyebrow">Ongoing consulting services</span>
+    <h2>Compliance is not a one-time event.</h2>
+    <p class="lede">Getting your policies and procedures in place is a critical first step - but regulations change, audits happen, staff turn over, and gaps develop over time. Our monthly packages give you an expert partner every month: reviewing your performance data, flagging risks before they become problems, and keeping your program current so you're always audit-ready.</p>
+
+    <div class="svc-pricing">
+      <div class="svc-tier">
+        <div class="svc-tier__name">Starter</div>
+        <p class="svc-tier__tag">Essential compliance - a solid foundation</p>
+        <div class="svc-price">$850<span> / month</span></div>
+        <ul>
+          <li>Monthly {{ scope }} reporting review</li>
+          <li>Basic compliance recommendations</li>
+          <li>Limited email support</li>
+          <li>Access to the AMA client resource library</li>
+        </ul>
+        {%- if settings.calendly_url != blank -%}
+          <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Get Started</a>
+        {%- endif -%}
+      </div>
+
+      <div class="svc-tier svc-tier--pop">
+        <span class="svc-tier__badge">★ Most popular</span>
+        <div class="svc-tier__name">Pro</div>
+        <p class="svc-tier__tag">Stronger oversight - smarter compliance</p>
+        <div class="svc-price">$1,500<span> / month</span></div>
+        <ul>
+          <li>Everything in Starter, plus:</li>
+          <li>Monthly one-on-one consulting session</li>
+          <li>Detailed meeting minutes &amp; session notes</li>
+          <li>Enhanced compliance monitoring</li>
+          <li>Proactive, strategic compliance oversight</li>
+        </ul>
+        {%- if settings.calendly_url != blank -%}
+          <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--full" target="_blank" rel="noopener">Get Started</a>
+        {%- endif -%}
+      </div>
+
+      <div class="svc-tier">
+        <div class="svc-tier__name">Premier</div>
+        <p class="svc-tier__tag">Comprehensive support - complete confidence</p>
+        <div class="svc-price">$2,500<span> / month</span></div>
+        <ul>
+          <li>Everything in Starter &amp; Pro, plus:</li>
+          <li>Bi-weekly one-on-one consulting sessions</li>
+          <li>Advanced {{ scope }} reporting analysis</li>
+          <li>Customized compliance strategies</li>
+          <li>End-to-end compliance leadership</li>
+        </ul>
+        {%- if settings.calendly_url != blank -%}
+          <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Get Started</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <p style="margin-top: 1.4rem; color: var(--ink-soft); font-size: 0.95rem;">All packages are month-to-month. No long-term contracts required. Consulting packages start at $850/month.</p>
+
+    <div class="svc-note" style="margin-top: 1.6rem;">
+      <strong>Please note:</strong> All policy and procedure packages are sold separately from ongoing consulting services. Outcomes depend on the policies and procedures you currently have in place. AMA Quality Consulting reviews your existing operations to identify gaps or areas for improvement, then provides professional recommendations to help you meet your day-to-day compliance goals.
+    </div>
+  </div>
+</section>

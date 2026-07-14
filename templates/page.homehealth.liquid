@@ -1,0 +1,133 @@
+{%- comment -%}
+  Home Health scope-of-service page. Assign in the Shopify admin:
+  Online Store → Pages → (Home Health page) → Theme template → "page.homehealth".
+{%- endcomment -%}
+{% render 'service-styles' %}
+<div class="svc-page">
+
+<section class="svc-hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="svc-kicker">Scope of service · Home health</span>
+        <h1>The Complete Home Health Policy &amp; Procedure Compliance Program</h1>
+        <p class="lede">Everything your home health agency needs to operate safely, compliantly, and with confidence - professionally built and ready to use.</p>
+        <div class="btn-row">
+          {%- if settings.calendly_url != blank -%}
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
+          {%- endif -%}
+          <a href="/pages/contact" class="btn btn--outline btn--lg">Ask a Question</a>
+        </div>
+      </div>
+      <div class="hero-scene" aria-hidden="true">{% render 'illus-binder' %}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Is your home health agency truly compliant?</span>
+    <h2>One compliance gap can trigger a deficiency citation, a survey failure, or a Medicare billing suspension.</h2>
+    <p class="lede">Home health agencies face one of the most complex, heavily regulated environments in healthcare - CMS Conditions of Participation, state licensure, OSHA standards, HIPAA mandates, infection control obligations, and accreditation surveys. Most agencies don't have the time or internal expertise to build a comprehensive compliance system from scratch.</p>
+    <p class="lede">The AMA Quality Consulting Home Health Compliance Program is a professionally developed, turnkey system covering every clinical, operational, regulatory, and administrative requirement your agency must meet.</p>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="grid grid--2" style="align-items: center; margin-bottom: 1rem;">
+      <div>
+        <span class="eyebrow">What's included</span>
+        <h2>18 complete program components</h2>
+        <p class="lede">Each component contains professionally written policies, procedures, forms, logs, and supporting documentation - ready to implement from day one.</p>
+      </div>
+      <div style="text-align: center;" aria-hidden="true">
+        <div class="svc-count">18</div>
+        <p style="color: var(--ink-soft); margin: 0;">components. One complete program.</p>
+      </div>
+    </div>
+    <div class="svc-components-grid">
+      {%- assign items = "Comprehensive Policy & Procedure Manual (13 Chapters), After Hours Call Log, Compliance Program, Complaint Program, Employee Handbook, Adverse Events, Emergency Preparedness, Sample Employee File, Business Binder, Sample Patient File, Safety Program, Sample Patient Packet, Infection Control Program, Physician Verification Binder, Staff Training Program, Equipment Management Binder, Chart Audit Program, SDS (Safety Data Sheet) Binder" | split: ", " -%}
+      {%- for item in items -%}
+        <div>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(18,165,160,0.16)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#0e7c7b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>{{ item }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="svc-note" style="margin-top: 1.6rem;">
+      <strong>Customized to your service lines.</strong> Whether you offer skilled nursing, physical, occupational, or speech therapy, home health aide services, or a combination, AMA develops additional policies and processes so your compliance program reflects exactly what you do.
+    </div>
+  </div>
+</section>
+
+<section class="section svc-why">
+  <div class="container">
+    <span class="eyebrow">Why this program matters</span>
+    <h2>Built to hold up under a survey.</h2>
+    <div class="grid grid--2" style="margin-top: 1.8rem;">
+      <div class="card">
+        <h3>P&amp;P manual - 13 chapters</h3>
+        <p>Your foundational manual spans thirteen chapters covering every dimension of home health operations - patient intake, care delivery, clinical documentation, billing compliance, and staff management. The cornerstone of a defensible, survey-ready program.</p>
+      </div>
+      <div class="card">
+        <h3>Compliance &amp; adverse event documentation</h3>
+        <p>Surveyors expect a documented compliance program and a clear process for identifying, reporting, and responding to adverse events. You get both - with the policies and forms to demonstrate accountability.</p>
+      </div>
+      <div class="card">
+        <h3>Infection control &amp; safety</h3>
+        <p>Home health environments require rigorous infection prevention. The Infection Control and Safety Programs give your clinical staff the policies, procedures, and documentation to protect patients, protect themselves, and satisfy surveyor scrutiny.</p>
+      </div>
+      <div class="card">
+        <h3>Emergency preparedness &amp; after-hours</h3>
+        <p>CMS requires a documented Emergency Preparedness plan and around-the-clock clinical access. The Emergency Preparedness and After Hours Call Log components satisfy both with tools that hold up under review.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Built for agencies who take compliance seriously</span>
+    <h2>Is this program for you?</h2>
+    <ul class="checklist" style="margin-top: 1.6rem; font-size: 1.05rem;">
+      <li><strong>New agencies</strong> pursuing initial Medicare and Medicaid certification</li>
+      <li><strong>Established agencies</strong> preparing for CMS recertification or accreditation surveys</li>
+      <li><strong>Agencies with a deficiency citation</strong> that need to strengthen their compliance foundation</li>
+      <li><strong>Multi-location organizations</strong> standardizing operations and policies across all sites</li>
+      <li><strong>Any agency</strong> that wants a complete program without the cost of an in-house compliance team</li>
+    </ul>
+  </div>
+</section>
+
+{% render 'service-packages', scope: 'home health', audience: 'agency' %}
+
+<section class="section section--navy">
+  <div class="container center">
+    <h2>Ready to protect your home health agency?</h2>
+    <p class="lede" style="margin-inline: auto;">We'll review your current operations, identify any gaps, and match you to the level of support that fits your agency, your budget, and your goals.</p>
+    <div class="btn-row" style="justify-content: center;">
+      {%- if settings.calendly_url != blank -%}
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
+      {%- endif -%}
+      {%- if settings.contact_email != blank -%}
+        <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>
+      {%- endif -%}
+    </div>
+    <p style="margin-top: 1.6rem; color: #c3d2e2; font-size: 0.95rem;">Your compliance. Our expertise. Your peace of mind.<br>Serving home health agencies nationwide.</p>
+  </div>
+</section>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Home Health Policy & Procedure Compliance Program",
+  "serviceType": "Home health compliance consulting",
+  "provider": { "@type": "ProfessionalService", "name": {{ shop.name | json }}, "url": {{ shop.url | json }} },
+  "areaServed": "United States",
+  "description": "Turnkey home health compliance system with 18 program components covering a 13-chapter P&P manual, compliance and adverse events, infection control, chart audit, emergency preparedness, plus monthly consulting packages from $850/month."
+}
+</script>

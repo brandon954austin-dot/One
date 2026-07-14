@@ -1,0 +1,133 @@
+{%- comment -%}
+  Physician Office scope-of-service page. Assign in the Shopify admin:
+  Online Store → Pages → (Physician page) → Theme template → "page.physician".
+{%- endcomment -%}
+{% render 'service-styles' %}
+<div class="svc-page">
+
+<section class="svc-hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="svc-kicker">Scope of service · Physician office</span>
+        <h1>The Complete Physician Office Policy &amp; Procedure Compliance Program</h1>
+        <p class="lede">Everything your physician practice needs to operate safely, meet regulatory standards, and protect your license - professionally built and ready to use.</p>
+        <div class="btn-row">
+          {%- if settings.calendly_url != blank -%}
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
+          {%- endif -%}
+          <a href="/pages/contact" class="btn btn--outline btn--lg">Ask a Question</a>
+        </div>
+      </div>
+      <div class="hero-scene" aria-hidden="true">{% render 'illus-binder' %}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Is your physician office truly compliant?</span>
+    <h2>A single documentation gap can expose your practice to fines, regulatory action, or liability.</h2>
+    <p class="lede">Physician offices operate in one of the most regulated environments in healthcare - OSHA standards, HIPAA, DEA controlled substance oversight, CMS billing compliance, state medical board regulations, and accreditation expectations - and they apply regardless of your specialty or practice size. Most offices don't have a dedicated compliance officer.</p>
+    <p class="lede">That's exactly what this program provides: a professionally developed, turnkey system built for physician practices, customized to your scope of service and specialty.</p>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="grid grid--2" style="align-items: center; margin-bottom: 1rem;">
+      <div>
+        <span class="eyebrow">What's included</span>
+        <h2>19 complete program components</h2>
+        <p class="lede">Each component contains professionally written SOPs, policies, logs, forms, and supporting documentation - ready to implement from day one.</p>
+      </div>
+      <div style="text-align: center;" aria-hidden="true">
+        <div class="svc-count">19</div>
+        <p style="color: var(--ink-soft); margin: 0;">components. One complete program.</p>
+      </div>
+    </div>
+    <div class="svc-components-grid">
+      {%- assign items = "Master SOP Policy & Procedure Manual, MSDS (Material Safety Data Sheets), Safety Program, Outdated / Discontinued Medication (Quarantine) Log, Staff Training, Business Binder, Patient Complaint, After Hours Call Log, Controlled Substance Log, Hazardous Waste Distribution Record, Emergency Preparedness, Temperature Records, Medication Error & Adverse Events, Sample New Patient Packet, Performance Improvement (CQI), Sample Employee File, Medication Storage Area & Inspection Log, Patient Info Wall Postings, Employee Handbook" | split: ", " -%}
+      {%- for item in items -%}
+        <div>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(18,165,160,0.16)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#0e7c7b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>{{ item }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="svc-note" style="margin-top: 1.6rem;">
+      <strong>Customized to your specialty.</strong> A family medicine clinic has different obligations than a cardiology group, an orthopedic practice, or a pain management office. AMA develops additional policies and processes tailored to your specific scope of service and specialty.
+    </div>
+  </div>
+</section>
+
+<section class="section svc-why">
+  <div class="container">
+    <span class="eyebrow">Why this program matters</span>
+    <h2>Built for a defensible, audit-ready practice.</h2>
+    <div class="grid grid--2" style="margin-top: 1.8rem;">
+      <div class="card">
+        <h3>Master SOP manual</h3>
+        <p>The backbone of a defensible practice. It documents how your office operates across every function - clinical protocols, staff roles, patient safety, billing, and quality oversight - giving inspectors and legal counsel a clear picture of a professionally managed practice.</p>
+      </div>
+      <div class="card">
+        <h3>Controlled substance &amp; medication management</h3>
+        <p>DEA oversight of controlled substances in physician offices is strict and unforgiving. The Controlled Substance Log, Storage &amp; Inspection Log, Quarantine Log, and Temperature Records give you a complete, documented medication management system.</p>
+      </div>
+      <div class="card">
+        <h3>Medication error, adverse events &amp; improvement</h3>
+        <p>Every practice must have a documented process for identifying, reporting, and responding to medication errors and adverse events. Paired with a Performance Improvement (CQI) Program, you get a closed-loop quality system.</p>
+      </div>
+      <div class="card">
+        <h3>OSHA, safety &amp; hazardous waste</h3>
+        <p>OSHA standards apply to every physician office. The Safety Program, MSDS Binder, and Hazardous Waste Distribution Record ensure your practice is fully documented and prepared for an OSHA inspection - without the guesswork.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Built for practices that take compliance seriously</span>
+    <h2>Is this program for you?</h2>
+    <ul class="checklist" style="margin-top: 1.6rem; font-size: 1.05rem;">
+      <li><strong>Solo and small group practices</strong> that need a complete foundation without a full-time compliance officer</li>
+      <li><strong>Specialty practices</strong> - cardiology, orthopedics, pain management, OB/GYN, pediatrics, and more - needing specialty-specific documentation</li>
+      <li><strong>Practices preparing</strong> for accreditation surveys, credentialing reviews, or payer audits</li>
+      <li><strong>Multi-location groups</strong> standardizing operations and documentation across all sites</li>
+      <li><strong>Any practice</strong> that received a regulatory finding or audit inquiry and needs documented corrective action</li>
+    </ul>
+  </div>
+</section>
+
+{% render 'service-packages', scope: 'physician office', audience: 'practice' %}
+
+<section class="section section--navy">
+  <div class="container center">
+    <h2>Ready to protect your practice?</h2>
+    <p class="lede" style="margin-inline: auto;">We'll review your current operations, identify any gaps, and match you to the level of support that fits your practice, your budget, and your goals.</p>
+    <div class="btn-row" style="justify-content: center;">
+      {%- if settings.calendly_url != blank -%}
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
+      {%- endif -%}
+      {%- if settings.contact_email != blank -%}
+        <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>
+      {%- endif -%}
+    </div>
+    <p style="margin-top: 1.6rem; color: #c3d2e2; font-size: 0.95rem;">Your compliance. Our expertise. Your peace of mind.<br>Serving physician practices nationwide.</p>
+  </div>
+</section>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Physician Office Policy & Procedure Compliance Program",
+  "serviceType": "Physician office compliance consulting",
+  "provider": { "@type": "ProfessionalService", "name": {{ shop.name | json }}, "url": {{ shop.url | json }} },
+  "areaServed": "United States",
+  "description": "Turnkey physician office compliance system with 19 program components covering a master SOP manual, controlled substance management, medication error and CQI, OSHA and hazardous waste compliance, plus monthly consulting packages from $850/month."
+}
+</script>

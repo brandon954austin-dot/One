@@ -1,0 +1,130 @@
+{%- comment -%}
+  Pharmacy scope-of-service page. Assign in the Shopify admin:
+  Online Store → Pages → (Pharmacy page) → Theme template → "page.pharmacy".
+{%- endcomment -%}
+{% render 'service-styles' %}
+<div class="svc-page">
+
+<section class="svc-hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="svc-kicker">Scope of service · Pharmacy</span>
+        <h1>The Complete Pharmacy Policy &amp; Procedure Compliance Program</h1>
+        <p class="lede">Everything your pharmacy needs to operate safely, meet regulatory requirements, and protect your license - professionally built and ready to use.</p>
+        <div class="btn-row">
+          {%- if settings.calendly_url != blank -%}
+            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
+          {%- endif -%}
+          <a href="/pages/contact" class="btn btn--outline btn--lg">Ask a Question</a>
+        </div>
+      </div>
+      <div class="hero-scene" aria-hidden="true">{% render 'illus-binder' %}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Is your pharmacy truly compliant?</span>
+    <h2>A missing SOP or a lapse in controlled substance tracking can mean fines, license suspension, or the loss of your ability to operate.</h2>
+    <p class="lede">Pharmacies operate under an intricate, constantly evolving regulatory landscape - state board of pharmacy requirements, DEA controlled substance regulations, OSHA standards, medication safety mandates, and accreditation expectations. Most owners and directors don't have the bandwidth to build a comprehensive compliance program from scratch.</p>
+    <p class="lede">The AMA Quality Consulting Pharmacy Compliance Program is a professionally developed, turnkey system built specifically for pharmacy operations - covering every clinical, operational, regulatory, and safety requirement your pharmacy must meet.</p>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="grid grid--2" style="align-items: center; margin-bottom: 1rem;">
+      <div>
+        <span class="eyebrow">What's included</span>
+        <h2>19 complete program components</h2>
+        <p class="lede">Each component contains professionally written SOPs, policies, logs, forms, and supporting documentation - ready to implement from day one.</p>
+      </div>
+      <div style="text-align: center;" aria-hidden="true">
+        <div class="svc-count">19</div>
+        <p style="color: var(--ink-soft); margin: 0;">components. One complete program.</p>
+      </div>
+    </div>
+    <div class="svc-components-grid">
+      {%- assign items = "Master SOP Policy & Procedure Manual, MSDS (Material Safety Data Sheets), Safety Program, Outdated / Discontinued Medication (Quarantine) Log, Staff Training, Business Binder, Patient Complaint, After Hours Call Log, Controlled Substance Log, Hazardous Waste Distribution Record, Emergency Preparedness, Temperature Records, Medication Error & Adverse Events, Sample New Patient Packet, Performance Improvement (CQI), Sample Employee File, Medication Storage Area & Inspection Log, Patient Info Wall Postings, Employee Handbook" | split: ", " -%}
+      {%- for item in items -%}
+        <div>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(18,165,160,0.16)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#0e7c7b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>{{ item }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="section svc-why">
+  <div class="container">
+    <span class="eyebrow">Why this program matters</span>
+    <h2>Built where inspectors focus.</h2>
+    <div class="grid grid--2" style="margin-top: 1.8rem;">
+      <div class="card">
+        <h3>Master SOP manual</h3>
+        <p>The cornerstone of your entire program. It documents how your pharmacy operates - from dispensing and patient counseling to staff responsibilities and quality assurance - giving surveyors and accreditors a clear picture of a well-run operation.</p>
+      </div>
+      <div class="card">
+        <h3>Controlled substance &amp; medication management</h3>
+        <p>DEA compliance and controlled substance accountability are among the highest-risk areas for any pharmacy. The Controlled Substance Log and Quarantine Log give you the infrastructure to track every substance accurately and demonstrate full accountability.</p>
+      </div>
+      <div class="card">
+        <h3>Medication error, adverse events &amp; CQI</h3>
+        <p>Tracking and learning from medication errors is both a regulatory requirement and essential to patient safety. Paired with a Performance Improvement (CQI) Program, you get a closed-loop quality system that protects patients and demonstrates accountability.</p>
+      </div>
+      <div class="card">
+        <h3>Temperature &amp; storage compliance</h3>
+        <p>Proper medication storage is a fundamental requirement inspectors always verify. The Storage Area &amp; Inspection Log and Temperature Records give staff a consistent, documented process - so every finding is on paper before the inspector arrives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container" style="max-width: 800px;">
+    <span class="eyebrow">Built for pharmacies that can't afford a compliance gap</span>
+    <h2>Is this program for you?</h2>
+    <ul class="checklist" style="margin-top: 1.6rem; font-size: 1.05rem;">
+      <li><strong>Independent and community pharmacies</strong> establishing or strengthening their compliance foundation</li>
+      <li><strong>Specialty and compounding pharmacies</strong> managing heightened scrutiny and DEA oversight</li>
+      <li><strong>Long-term care pharmacies</strong> preparing for state board inspections or accreditation surveys</li>
+      <li><strong>Multi-location operations</strong> standardizing SOPs and documentation across all sites</li>
+      <li><strong>Any pharmacy</strong> that received a state board deficiency and needs documented corrective action</li>
+    </ul>
+  </div>
+</section>
+
+{% render 'service-packages', scope: 'pharmacy', audience: 'pharmacy' %}
+
+<section class="section section--navy">
+  <div class="container center">
+    <h2>Ready to protect your pharmacy?</h2>
+    <p class="lede" style="margin-inline: auto;">We'll review your current operations, identify any gaps, and match you to the level of support that fits your pharmacy, your budget, and your goals.</p>
+    <div class="btn-row" style="justify-content: center;">
+      {%- if settings.calendly_url != blank -%}
+        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
+      {%- endif -%}
+      {%- if settings.contact_email != blank -%}
+        <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>
+      {%- endif -%}
+    </div>
+    <p style="margin-top: 1.6rem; color: #c3d2e2; font-size: 0.95rem;">Your compliance. Our expertise. Your peace of mind.<br>Serving pharmacies nationwide.</p>
+  </div>
+</section>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Pharmacy Policy & Procedure Compliance Program",
+  "serviceType": "Pharmacy compliance consulting",
+  "provider": { "@type": "ProfessionalService", "name": {{ shop.name | json }}, "url": {{ shop.url | json }} },
+  "areaServed": "United States",
+  "description": "Turnkey pharmacy compliance system with 19 program components covering a master SOP manual, controlled substance logs, medication error and CQI, temperature and storage compliance, hazardous waste, plus monthly consulting packages from $850/month."
+}
+</script>

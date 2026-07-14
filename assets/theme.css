@@ -137,6 +137,26 @@ img, svg { max-width: 100%; height: auto; }
 }
 .hero h1 { color: #fff; max-width: 17ch; }
 .hero .lede { color: #c3d2e2; }
+/* Scopes of service (homepage) */
+.services { background: var(--bg-soft); }
+.services-grid { display: grid; gap: 1.3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); margin-top: 1.9rem; }
+.service-card {
+  display: flex; flex-direction: column; gap: 0.2rem;
+  background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--teal-500);
+  border-radius: var(--radius-lg); padding: 1.6rem; text-decoration: none; color: inherit;
+  box-shadow: var(--shadow-card); transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.service-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(11, 37, 69, 0.13); }
+.service-card__icon {
+  width: 52px; height: 52px; border-radius: 12px; margin-bottom: 0.9rem;
+  background: var(--teal-50); border: 1px solid var(--teal-100);
+  display: flex; align-items: center; justify-content: center;
+}
+.service-card h3 { margin: 0 0 0.3rem; font-size: 1.2rem; }
+.service-card p { color: var(--ink-soft); font-size: 0.96rem; margin: 0 0 0.9rem; flex-grow: 1; }
+.service-card .service-card__cta { color: var(--teal-600); font-weight: 650; font-size: 0.95rem; }
+.service-card:hover .service-card__cta { color: var(--navy-800); }
+
 .hero-grid { display: grid; gap: 2.5rem; align-items: center; }
 @media (min-width: 920px) { .hero-grid { grid-template-columns: 1.15fr 0.85fr; } }
 .hero-scene { display: flex; justify-content: center; }
