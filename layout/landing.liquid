@@ -20,7 +20,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <span class="brand">
-        <svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg class="brand__mark" width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true">
           <defs>
             <linearGradient id="amaNavy" x1="12" y1="14" x2="18" y2="32" gradientUnits="userSpaceOnUse">
               <stop offset="0" stop-color="#10154f"/>
@@ -40,11 +40,11 @@
           <path d="M20.5 16 L20 23" stroke="url(#amaBlue)" stroke-width="12.5" stroke-linecap="round"/>
           <path d="M33.5 13 L19.5 31.5" stroke="url(#amaGreen)" stroke-width="13" stroke-linecap="round"/>
         </svg>
-        <span>{{ shop.name }}</span>
+        <span class="brand__name"><b>AMA</b><span>Quality Consulting</span></span>
       </span>
       <div style="margin-left: auto; display: flex; align-items: center; gap: 1.1rem;">
         {%- if settings.phone_display != blank -%}
-          <a href="tel:{{ settings.phone_tel }}" style="text-decoration: none; font-weight: 650; color: var(--navy-900); white-space: nowrap;">
+          <a class="lp-header-phone" href="tel:{{ settings.phone_tel }}" style="text-decoration: none; font-weight: 650; color: var(--navy-900); white-space: nowrap;">
             📞 {{ settings.phone_display }}
           </a>
         {%- endif -%}

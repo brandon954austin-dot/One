@@ -15,12 +15,17 @@
       radial-gradient(700px 420px at -10% 110%, rgba(47, 69, 240, 0.22), transparent 55%),
       linear-gradient(160deg, var(--navy-900), var(--navy-950));
     color: #e8eef5;
-    padding-block: clamp(3rem, 7vw, 5rem);
+    padding-block: clamp(2rem, 5vw, 3.25rem);
     overflow: hidden;
   }
-  .lp-hero-grid { display: grid; gap: 2.5rem; align-items: center; }
-  @media (min-width: 920px) { .lp-hero-grid { grid-template-columns: 1.15fr 0.85fr; } }
-  .lp-hero h1 { color: #fff; max-width: 20ch; }
+  .lp-hero-grid { display: grid; gap: 1.8rem; align-items: start; grid-template-areas: "copy" "form" "extra"; }
+  .lp-hero-copy { grid-area: copy; }
+  .lp-hero-form { grid-area: form; }
+  .lp-hero-extra { grid-area: extra; }
+  @media (min-width: 920px) {
+    .lp-hero-grid { grid-template-columns: 1.02fr 0.98fr; grid-template-areas: "copy form" "extra form"; column-gap: 3rem; row-gap: 1.5rem; }
+  }
+  .lp-hero h1 { color: #fff; max-width: 20ch; font-size: clamp(1.8rem, 3.6vw, 2.7rem); }
   .lp-hero .lede { color: #c3d2e2; }
   .lp-kicker {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -105,41 +110,120 @@
   .lp-sticky-cta .btn { display: block; width: 100%; text-align: center; }
   @media (min-width: 920px) { .lp-sticky-cta { display: none; } }
 
+  @media (max-width: 560px) { .lp-header-phone { display: none; } }
+
   html { scroll-behavior: smooth; }
 </style>
 
-<!-- ============ HERO ============ -->
+<!-- ============ HERO (with form) ============ -->
 <section class="lp-hero">
   <div class="container lp-hero-grid">
-    <div>
+    <div class="lp-hero-copy">
       <span class="lp-kicker">DMEPOS Accreditation &amp; Compliance</span>
       <h1>Pass your survey the first time - with a program built for <em>your</em> operation.</h1>
-      <p class="lede">Custom DMEPOS compliance programs and accreditation packages, written around how you actually operate - professionally assembled and shipped to your door survey-ready.</p>
-      <div class="lp-check-line">
-        <div>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>30+ years</strong> of DMEPOS industry experience on your side</span>
-        </div>
-        <div>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>100% custom</strong> - written around your products, staff, and workflows</span>
-        </div>
-        <div>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>Delivered done</strong> - printed, assembled, and shipped ready for the surveyor</span>
-        </div>
-      </div>
-      <div class="btn-row">
-        <a href="#lead-form" class="btn btn--primary btn--lg">Get My Free Readiness Review</a>
-        {%- if settings.calendly_url != blank -%}
-          <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--lg" target="_blank" rel="noopener">Book a Call Instead</a>
-        {%- endif -%}
-      </div>
+      <p class="lede">Custom DMEPOS compliance programs written around how you actually operate - professionally assembled and shipped to your door survey-ready.</p>
       <p class="lp-reassure">Free · takes 60 seconds · no obligation, no sales pressure</p>
     </div>
 
-    <div class="lp-scene" aria-hidden="true">
-      {% render 'illus-binder' %}
+    <div class="lp-hero-form" id="lead-form">
+      <div class="lp-form-card">
+        {% form 'contact' %}
+          {%- if form.posted_successfully? -%}
+            <div class="lp-success">
+              <div class="lp-success-mark">
+                <svg width="64" height="64" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <circle cx="24" cy="24" r="22" fill="rgba(43,212,115,0.16)"/>
+                  <path d="M14 24.5l7 7 13-15" stroke="#25c4a0" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>You're in - we'll be in touch within one business day.</h3>
+              <p style="color: var(--ink-soft);">Want answers faster? Grab a time on the calendar and let's talk it through.</p>
+              {%- if settings.calendly_url != blank -%}
+                <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Book My Free Call Now</a>
+              {%- endif -%}
+              {%- if settings.phone_display != blank -%}
+                <p style="margin: 1rem 0 0; font-size: 0.95rem;">Or call us directly: <a href="tel:{{ settings.phone_tel }}"><strong>{{ settings.phone_display }}</strong></a></p>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <h3>Get your free readiness review</h3>
+            <p class="form-sub">Takes about 60 seconds. No obligation.</p>
+
+            {%- if form.errors -%}
+              <div class="form-errors">
+                <strong>Please fix the following:</strong>
+                <ul>
+                  {%- for field in form.errors -%}
+                    <li>{{ form.errors.messages[field] }}</li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="lead-name">Your name</label>
+                <input type="text" id="lead-name" name="contact[name]" required autocomplete="name">
+              </div>
+              <div class="form-field">
+                <label for="lead-company">Business name</label>
+                <input type="text" id="lead-company" name="contact[business_name]" autocomplete="organization">
+              </div>
+              <div class="form-field">
+                <label for="lead-email">Email</label>
+                <input type="email" id="lead-email" name="contact[email]" required autocomplete="email">
+              </div>
+              <div class="form-field">
+                <label for="lead-phone">Phone</label>
+                <input type="tel" id="lead-phone" name="contact[phone]" autocomplete="tel">
+              </div>
+              <div class="form-field">
+                <label for="lead-status">Which best describes you?</label>
+                <select id="lead-status" name="contact[supplier_status]">
+                  <option>New supplier - getting accredited for the first time</option>
+                  <option>Existing supplier - reaccreditation coming up</option>
+                  <option>Existing supplier - compliance program needs work</option>
+                  <option>Just exploring options</option>
+                </select>
+              </div>
+              <div>
+                <button type="submit" class="btn btn--primary btn--lg btn--full">Get My Free Review</button>
+              </div>
+            </div>
+
+            {%- if settings.calendly_url != blank -%}
+              <div class="lp-book-divider">or skip the form</div>
+              <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Call Now</a>
+            {%- endif -%}
+            <p class="lp-privacy-note">We respond within one business day. Please don't include patient information (PHI). By submitting you agree to our <a href="/pages/privacy-policy">privacy policy</a>.</p>
+          {%- endif -%}
+        {% endform %}
+      </div>
+    </div>
+
+    <div class="lp-hero-extra">
+      <p style="font-weight: 650; color: #fff; margin-bottom: 0.7rem;">Within one business day, you'll have:</p>
+      <div class="lp-check-line" style="margin-top: 0;">
+        <div>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>Your top readiness gaps</strong> - policies, training, site readiness, and enrollment</span>
+        </div>
+        <div>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>What the 2026 rules mean for you</strong> - annual resurveys, new locations, ownership changes</span>
+        </div>
+        <div>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>A straight answer on your timeline</strong> - and exactly what to fix first</span>
+        </div>
+      </div>
+      <div class="lp-authority">
+        <svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="22" fill="rgba(43,212,115,0.15)"/>
+          <path d="M14 24.5l7 7 13-15" stroke="#2bd473" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p><strong>Who you'll hear from:</strong> a DMEPOS industry veteran with 30+ years in supplier operations and compliance - not a call center, not a sales script.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -185,7 +269,7 @@
       <div class="card">
         <div class="step-num">1</div>
         <h3>Tell us where you stand</h3>
-        <p>Fill out the short form below (or book a call directly). We'll review your situation - new supplier, accreditation renewal, or compliance cleanup - for free.</p>
+        <p>Fill out the quick form at the top of the page (or book a call directly). We'll review your situation - new supplier, accreditation renewal, or compliance cleanup - for free.</p>
       </div>
       <div class="card">
         <div class="step-num">2</div>
@@ -208,7 +292,7 @@
         <h3>Free readiness review - no pressure, no obligation.</h3>
         <p>Fifteen minutes to find out exactly where your operation stands and what it takes to get survey-ready.</p>
       </div>
-      <a href="#lead-form" class="btn btn--primary btn--lg">Start Below ↓</a>
+      <a href="#lead-form" class="btn btn--primary btn--lg">Get My Free Review ↑</a>
     </div>
   </div>
 </section>
@@ -235,117 +319,6 @@
         <summary>How fast can we get survey-ready?</summary>
         <p>It depends on the gaps. Some suppliers need a few targeted fixes; others need a full program built. The readiness review gives you a realistic timeline for your situation - that's the point of doing it before committing to anything.</p>
       </details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ LEAD FORM (funnel end) ============ -->
-<section class="section lp-form-section" id="lead-form">
-  <div class="container lp-form-grid">
-    <div>
-      <span class="eyebrow" style="color: #7cefc4;">Get started</span>
-      <h2>Get your free DMEPOS readiness review</h2>
-      <p class="lede">Tell us a little about your operation. Within one business day you'll have:</p>
-      <div class="lp-check-line">
-        <div>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>Your top readiness gaps</strong> - policies, training, site readiness, and enrollment</span>
-        </div>
-        <div>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>What the 2026 rules mean for you</strong> - annual resurveys, new locations, ownership changes</span>
-        </div>
-        <div>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>A straight answer on your timeline</strong> - and exactly what to fix first</span>
-        </div>
-      </div>
-
-      <div class="lp-authority">
-        <svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <circle cx="24" cy="24" r="22" fill="rgba(43,212,115,0.15)"/>
-          <path d="M14 24.5l7 7 13-15" stroke="#2bd473" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <p><strong>Who you'll hear from:</strong> a DMEPOS industry veteran with 30+ years in supplier operations and compliance - not a call center, not a sales script. Your information stays private per our <a href="/pages/privacy-policy" style="color: #7cefc4;">privacy policy</a>.</p>
-      </div>
-    </div>
-
-    <div class="lp-form-card">
-      {% form 'contact' %}
-        {%- if form.posted_successfully? -%}
-          <div class="lp-success">
-            <div class="lp-success-mark">
-              <svg width="64" height="64" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                <circle cx="24" cy="24" r="22" fill="rgba(43,212,115,0.16)"/>
-                <path d="M14 24.5l7 7 13-15" stroke="#25c4a0" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3>You're in - we'll be in touch within one business day.</h3>
-            <p style="color: var(--ink-soft);">Want answers faster? Grab a time on the calendar and let's talk it through.</p>
-            {%- if settings.calendly_url != blank -%}
-              <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Book My Free Call Now</a>
-            {%- endif -%}
-            {%- if settings.phone_display != blank -%}
-              <p style="margin: 1rem 0 0; font-size: 0.95rem;">Or call us directly: <a href="tel:{{ settings.phone_tel }}"><strong>{{ settings.phone_display }}</strong></a></p>
-            {%- endif -%}
-          </div>
-        {%- else -%}
-          <h3>Free Readiness Review</h3>
-          <p class="form-sub">Takes about 60 seconds. No obligation.</p>
-
-          {%- if form.errors -%}
-            <div class="form-errors">
-              <strong>Please fix the following:</strong>
-              <ul>
-                {%- for field in form.errors -%}
-                  <li>{{ form.errors.messages[field] }}</li>
-                {%- endfor -%}
-              </ul>
-            </div>
-          {%- endif -%}
-
-          <div class="form-grid">
-            <div class="form-field">
-              <label for="lead-name">Your name</label>
-              <input type="text" id="lead-name" name="contact[name]" required autocomplete="name">
-            </div>
-            <div class="form-field">
-              <label for="lead-company">Business name</label>
-              <input type="text" id="lead-company" name="contact[business_name]" autocomplete="organization">
-            </div>
-            <div class="form-field">
-              <label for="lead-email">Email</label>
-              <input type="email" id="lead-email" name="contact[email]" required autocomplete="email">
-            </div>
-            <div class="form-field">
-              <label for="lead-phone">Phone</label>
-              <input type="tel" id="lead-phone" name="contact[phone]" autocomplete="tel">
-            </div>
-            <div class="form-field">
-              <label for="lead-status">Which best describes you?</label>
-              <select id="lead-status" name="contact[supplier_status]">
-                <option>New supplier - getting accredited for the first time</option>
-                <option>Existing supplier - reaccreditation coming up</option>
-                <option>Existing supplier - compliance program needs work</option>
-                <option>Just exploring options</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <label for="lead-body">Anything we should know? (optional)</label>
-              <textarea id="lead-body" name="contact[body]" rows="3" placeholder="Timeline, products you supply, current situation…"></textarea>
-            </div>
-            <div>
-              <button type="submit" class="btn btn--primary btn--lg btn--full">Get My Free Review</button>
-            </div>
-          </div>
-
-          {%- if settings.calendly_url != blank -%}
-            <div class="lp-book-divider">or skip the form</div>
-            <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Call Now</a>
-          {%- endif -%}
-          <p class="lp-privacy-note">We respond within one business day. Please don't include patient information (PHI). By submitting you agree to our <a href="/pages/privacy-policy">privacy policy</a>.</p>
-        {%- endif -%}
-      {% endform %}
     </div>
   </div>
 </section>
