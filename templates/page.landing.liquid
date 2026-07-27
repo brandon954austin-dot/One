@@ -119,10 +119,10 @@
 <section class="lp-hero">
   <div class="container lp-hero-grid">
     <div class="lp-hero-copy">
-      <span class="lp-kicker">DMEPOS Accreditation &amp; Compliance</span>
-      <h1>Pass your survey the first time - with a program built for <em>your</em> operation.</h1>
-      <p class="lede">Custom DMEPOS compliance programs written around how you actually operate - professionally assembled and shipped to your door survey-ready.</p>
-      <p class="lp-reassure">Free · takes 60 seconds · no obligation, no sales pressure</p>
+      <span class="lp-kicker">Free download · 2026 edition</span>
+      <h1>The free DMEPOS Readiness Checklist for 2026.</h1>
+      <p class="lede">The exact points a surveyor or auditor checks - accreditation, CMS-855S enrollment, delivery documentation, site readiness, and the 2026 rule changes. Find your gaps before they find you.</p>
+      <p class="lp-reassure">Free instant download · 3 quick fields · no cost, no obligation</p>
     </div>
 
     <div class="lp-hero-form" id="lead-form">
@@ -136,18 +136,20 @@
                   <path d="M14 24.5l7 7 13-15" stroke="#25c4a0" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <h3>You're in - we'll be in touch within one business day.</h3>
-              <p style="color: var(--ink-soft);">Want answers faster? Grab a time on the calendar and let's talk it through.</p>
+              <h3>Your checklist is ready.</h3>
+              <p style="color: var(--ink-soft);">Click below to download the DMEPOS Readiness Checklist. We've also saved your details and may follow up with a few resources - you can opt out anytime.</p>
+              <a href="{{ 'dmepos-readiness-checklist.pdf' | asset_url }}" class="btn btn--primary btn--lg btn--full" download>Download Your Checklist (PDF)</a>
               {%- if settings.calendly_url != blank -%}
-                <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Book My Free Call Now</a>
+                <div class="lp-book-divider">want a hand?</div>
+                <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Readiness Review</a>
               {%- endif -%}
               {%- if settings.phone_display != blank -%}
-                <p style="margin: 1rem 0 0; font-size: 0.95rem;">Or call us directly: <a href="tel:{{ settings.phone_tel }}"><strong>{{ settings.phone_display }}</strong></a></p>
+                <p style="margin: 1rem 0 0; font-size: 0.95rem;">Questions? Call us at <a href="tel:{{ settings.phone_tel }}"><strong>{{ settings.phone_display }}</strong></a></p>
               {%- endif -%}
             </div>
           {%- else -%}
-            <h3>Get your free readiness review</h3>
-            <p class="form-sub">Takes about 60 seconds. No obligation.</p>
+            <h3>Where should we send your checklist?</h3>
+            <p class="form-sub">Free instant download. No cost, no obligation.</p>
 
             {%- if form.errors -%}
               <div class="form-errors">
@@ -160,14 +162,11 @@
               </div>
             {%- endif -%}
 
+            <input type="hidden" name="contact[requested]" value="DMEPOS Readiness Checklist">
             <div class="form-grid">
               <div class="form-field">
                 <label for="lead-name">Your name</label>
                 <input type="text" id="lead-name" name="contact[name]" required autocomplete="name">
-              </div>
-              <div class="form-field">
-                <label for="lead-company">Business name</label>
-                <input type="text" id="lead-company" name="contact[business_name]" autocomplete="organization">
               </div>
               <div class="form-field">
                 <label for="lead-email">Email</label>
@@ -175,46 +174,37 @@
               </div>
               <div class="form-field">
                 <label for="lead-phone">Phone</label>
-                <input type="tel" id="lead-phone" name="contact[phone]" autocomplete="tel">
-              </div>
-              <div class="form-field">
-                <label for="lead-status">Which best describes you?</label>
-                <select id="lead-status" name="contact[supplier_status]">
-                  <option>New supplier - getting accredited for the first time</option>
-                  <option>Existing supplier - reaccreditation coming up</option>
-                  <option>Existing supplier - compliance program needs work</option>
-                  <option>Just exploring options</option>
-                </select>
+                <input type="tel" id="lead-phone" name="contact[phone]" required autocomplete="tel">
               </div>
               <div>
-                <button type="submit" class="btn btn--primary btn--lg btn--full">Get My Free Review</button>
+                <button type="submit" class="btn btn--primary btn--lg btn--full">Send Me the Checklist</button>
               </div>
             </div>
 
             {%- if settings.calendly_url != blank -%}
-              <div class="lp-book-divider">or skip the form</div>
-              <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Call Now</a>
+              <div class="lp-book-divider">or talk to us</div>
+              <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Readiness Review</a>
             {%- endif -%}
-            <p class="lp-privacy-note">We respond within one business day. Please don't include patient information (PHI). By submitting you agree to our <a href="/pages/privacy-policy">privacy policy</a>.</p>
+            <p class="lp-privacy-note">Instant download after you submit. Please don't include patient information (PHI). By submitting you agree to our <a href="/pages/privacy-policy">privacy policy</a>.</p>
           {%- endif -%}
         {% endform %}
       </div>
     </div>
 
     <div class="lp-hero-extra">
-      <p style="font-weight: 650; color: #fff; margin-bottom: 0.7rem;">Within one business day, you'll have:</p>
+      <p style="font-weight: 650; color: #fff; margin-bottom: 0.7rem;">What's inside the checklist:</p>
       <div class="lp-check-line" style="margin-top: 0;">
         <div>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>Your top readiness gaps</strong> - policies, training, site readiness, and enrollment</span>
+          <span><strong>6 sections, 30+ checkpoints</strong> - accreditation, CMS-855S, licensure, delivery docs, compliance, site readiness</span>
         </div>
         <div>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>What the 2026 rules mean for you</strong> - annual resurveys, new locations, ownership changes</span>
+          <span><strong>The 2026 rule changes</strong> - annual reaccreditation, survey-first new locations, ownership changes</span>
         </div>
         <div>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(43,212,115,0.18)"/><path d="M6 10.5l2.6 2.6L14.5 7" stroke="#2bd473" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>A straight answer on your timeline</strong> - and exactly what to fix first</span>
+          <span><strong>The exact evidence surveyors ask for</strong> - so you find the gaps before they do</span>
         </div>
       </div>
       <div class="lp-authority">
@@ -222,7 +212,7 @@
           <circle cx="24" cy="24" r="22" fill="rgba(43,212,115,0.15)"/>
           <path d="M14 24.5l7 7 13-15" stroke="#2bd473" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <p><strong>Who you'll hear from:</strong> a DMEPOS industry veteran with 30+ years in supplier operations and compliance - not a call center, not a sales script.</p>
+        <p><strong>Built by a DMEPOS veteran</strong> with 30+ years in supplier operations and compliance - the same checkpoints we use with paying clients.</p>
       </div>
     </div>
   </div>
@@ -264,22 +254,22 @@
 <section class="section">
   <div class="container">
     <span class="eyebrow">How it works</span>
-    <h2>From first call to survey-ready binder</h2>
+    <h2>Download it, work through it, know where you stand</h2>
     <div class="grid grid--3" style="margin-top: 1.8rem;">
       <div class="card">
         <div class="step-num">1</div>
-        <h3>Tell us where you stand</h3>
-        <p>Fill out the quick form at the top of the page (or book a call directly). We'll review your situation - new supplier, accreditation renewal, or compliance cleanup - for free.</p>
+        <h3>Get the checklist</h3>
+        <p>Enter your name, email, and phone at the top of the page. Your download starts on the very next screen - no waiting for an email.</p>
       </div>
       <div class="card">
         <div class="step-num">2</div>
-        <h3>We build your program</h3>
-        <p>A structured intake captures your products, staffing, and workflows so your program reflects reality, not boilerplate. Fixed price - no hourly billing.</p>
+        <h3>Check your operation against it</h3>
+        <p>Work through the six sections and mark only what you can prove with current, on-file documentation. Anything you can't put your hands on is a gap.</p>
       </div>
       <div class="card">
         <div class="step-num">3</div>
-        <h3>Open the box, pass the survey</h3>
-        <p>Your program arrives written, professionally printed, and assembled - organized exactly the way a surveyor expects to see it.</p>
+        <h3>Fix the gaps - on your own or with us</h3>
+        <p>Use it as your own punch list, or book a free readiness review and we'll help you prioritize what to fix first, in what order, for your timeline.</p>
       </div>
     </div>
 
@@ -289,10 +279,10 @@
         <path d="M14 24.5l7 7 13-15" stroke="#2bd473" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div>
-        <h3>Free readiness review - no pressure, no obligation.</h3>
-        <p>Fifteen minutes to find out exactly where your operation stands and what it takes to get survey-ready.</p>
+        <h3>Free checklist - instant download, no obligation.</h3>
+        <p>See the exact points a surveyor or auditor checks, plus what changed for DMEPOS suppliers in 2026.</p>
       </div>
-      <a href="#lead-form" class="btn btn--primary btn--lg">Get My Free Review ↑</a>
+      <a href="#lead-form" class="btn btn--primary btn--lg">Get the Checklist ↑</a>
     </div>
   </div>
 </section>
@@ -304,20 +294,20 @@
     <h2>Before you ask...</h2>
     <div style="margin-top: 1.6rem;">
       <details>
-        <summary>Is the readiness review really free?</summary>
-        <p>Yes. It's a short, focused review of where your operation stands - your timeline, your risk areas, and what it would take to close the gaps. You leave with that picture whether or not you ever hire us. No obligation, no pressure.</p>
+        <summary>Is the checklist really free?</summary>
+        <p>Yes - completely free, and it downloads instantly after you enter your details. No payment, no trial, no catch. It's the same set of checkpoints we use with paying clients.</p>
+      </details>
+      <details>
+        <summary>What do I get, exactly?</summary>
+        <p>A professionally designed PDF with six sections and 30+ checkpoints covering accreditation and supplier standards, CMS-855S / Medicare enrollment, licensure, delivery and documentation, corporate compliance, and site readiness - plus a plain-English summary of what changed for DMEPOS suppliers in 2026.</p>
       </details>
       <details>
         <summary>We already have a policy manual. Do we still need this?</summary>
-        <p>A binder on the shelf isn't the test anymore. With annual reaccreditation, surveyors check whether your day-to-day operations actually match your written program - document control, staff training, site readiness. That's exactly what the review looks at.</p>
+        <p>A binder on the shelf isn't the test anymore. With annual reaccreditation, surveyors check whether your day-to-day operations actually match your written program. The checklist is built around that gap - it helps you spot where your documentation and your operation have drifted apart.</p>
       </details>
       <details>
-        <summary>Do you guarantee accreditation?</summary>
-        <p>No one can honestly guarantee accreditation or Medicare billing privileges - accrediting organizations and enrollment contractors decide independently. What we do is help you identify and correct readiness gaps, prepare documentation, and strengthen operational compliance so you walk into the survey prepared.</p>
-      </details>
-      <details>
-        <summary>How fast can we get survey-ready?</summary>
-        <p>It depends on the gaps. Some suppliers need a few targeted fixes; others need a full program built. The readiness review gives you a realistic timeline for your situation - that's the point of doing it before committing to anything.</p>
+        <summary>Will you spam me or sell my info?</summary>
+        <p>No. We may follow up with a few helpful DMEPOS resources and you can opt out anytime. We don't sell your information - see our <a href="/pages/privacy-policy">privacy policy</a>.</p>
       </details>
     </div>
   </div>
@@ -325,7 +315,7 @@
 
 <!-- Mobile sticky CTA: appears after scrolling past the hero, hides at the form -->
 <div class="lp-sticky-cta" id="lp-sticky-cta" aria-hidden="true">
-  <a href="#lead-form" class="btn btn--primary">Get My Free Readiness Review</a>
+  <a href="#lead-form" class="btn btn--primary">Send Me the Free Checklist</a>
 </div>
 
 <script>
