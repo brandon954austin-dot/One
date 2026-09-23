@@ -12,7 +12,7 @@
     "phone_display": "(954) 444-2961",
     "phone_tel": "+19544442961",
     "contact_email": "Sales@amaqualityconsulting.com",
-    "calendly_url": "https://calendly.com/amaqualityconsulting/intake-call",
+    "calendly_url": "https://amaqc-crm.onrender.com/get-started",
     "meta_pixel_id": "883954478105062",
     "pluginseo_pageTitleTruncateChars": "999",
     "pluginseo_pageTitleEnableAppender": true,
@@ -50,6 +50,7 @@
     "pluginseo_metaDescriptionArticleTemplate": "%% article.excerpt_or_content || strip_newlines || strip_html || escape %%%% article.tags || take: '6' || join: ', ' || prepend_not_empty: ' Read about ' || append_not_empty: ' and more' %% %% article.title %% on the %% shop.name %% %% blog.title %% blog",
     "pluginseo_metaDescription404Template": "The page you requested can't be found, please visit %% shop.domain %% instead",
     "pluginseo_structuredDataDisplayLogo": false,
-    "pluginseo_structuredDataReviewApp": "autodetect"
+    "pluginseo_structuredDataReviewApp": "autodetect",
+    "content_for_index": []
   }
 }
