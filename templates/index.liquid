@@ -8,7 +8,7 @@
         <p class="lede">{{ settings.hero_subheading | default: 'We help DMEPOS suppliers fix compliance gaps, prepare for accreditation, review Medicare enrollment, and build policies that match real operations - without guesswork, last-minute scrambling, or generic templates.' }}</p>
         <div class="btn-row">
           {%- if settings.calendly_url != blank -%}
-            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
+            <a href="{% render 'lead-url', src: 'Homepage' %}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
           {%- endif -%}
           <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline btn--lg">Shop Programs</a>
         </div>
@@ -72,7 +72,7 @@
         <p>Laser safety, medical director oversight, and 22-binder compliance programs for medical aesthetics.</p>
         <span class="service-card__cta">View med spa services →</span>
       </a>
-      <a href="{{ settings.calendly_url | default: '/pages/contact' }}" class="service-card" {% if settings.calendly_url != blank %}target="_blank" rel="noopener"{% endif %}>
+      <a href="{% if settings.calendly_url != blank %}{% render 'lead-url', src: 'Homepage' %}{% else %}/pages/contact{% endif %}" class="service-card" {% if settings.calendly_url != blank %}target="_blank" rel="noopener"{% endif %}>
         <span class="service-card__icon" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#0e7c7b" stroke-width="1.8"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#2bd473" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -106,7 +106,7 @@
     </div>
     <p style="margin-top: 1.8rem;">
       {%- if settings.calendly_url != blank -%}
-        Not sure where you stand under the new rules? <a href="{{ settings.calendly_url }}" target="_blank" rel="noopener">Schedule a free readiness review →</a>
+        Not sure where you stand under the new rules? <a href="{% render 'lead-url', src: 'Homepage' %}" target="_blank" rel="noopener">Schedule a free readiness review →</a>
       {%- endif -%}
     </p>
   </div>
@@ -169,7 +169,7 @@
     <p class="lede" style="margin-inline: auto;">A free readiness review shows you exactly where your operation stands, what your survey timeline looks like, and what it takes to close the gaps.</p>
     <div class="btn-row" style="justify-content: center;">
       {%- if settings.calendly_url != blank -%}
-        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
+        <a href="{% render 'lead-url', src: 'Homepage' %}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
       {%- endif -%}
       {%- if settings.contact_email != blank -%}
         <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>

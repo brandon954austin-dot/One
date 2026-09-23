@@ -14,7 +14,7 @@
         <p class="lede">Everything your medical spa needs to operate safely, legally, and confidently - professionally built, customized for medical aesthetic practices, and ready to use on day one.</p>
         <div class="btn-row">
           {%- if settings.calendly_url != blank -%}
-            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
+            <a href="{% render 'lead-url', src: 'Med Spa Page' %}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
           {%- endif -%}
           <a href="/pages/contact" class="btn btn--outline btn--lg">Ask a Question</a>
         </div>
@@ -105,7 +105,7 @@
     <p class="lede" style="margin-inline: auto;">Stop guessing. Stop worrying. Stop putting your license at risk with incomplete documentation. Get a professionally built, ready-to-implement compliance system - so you can focus on delivering exceptional patient care.</p>
     <div class="btn-row" style="justify-content: center;">
       {%- if settings.calendly_url != blank -%}
-        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
+        <a href="{% render 'lead-url', src: 'Med Spa Page' %}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
       {%- endif -%}
       {%- if settings.contact_email != blank -%}
         <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>

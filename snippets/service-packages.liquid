@@ -25,7 +25,7 @@
           <li>Access to the AMA client resource library</li>
         </ul>
         {%- if settings.calendly_url != blank -%}
-          <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Get Started</a>
+          <a href="{% render 'lead-url', src: scope %}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Get Started</a>
         {%- endif -%}
       </div>
 
@@ -42,7 +42,7 @@
           <li>Proactive, strategic compliance oversight</li>
         </ul>
         {%- if settings.calendly_url != blank -%}
-          <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--full" target="_blank" rel="noopener">Get Started</a>
+          <a href="{% render 'lead-url', src: scope %}" class="btn btn--primary btn--full" target="_blank" rel="noopener">Get Started</a>
         {%- endif -%}
       </div>
 
@@ -58,7 +58,7 @@
           <li>End-to-end compliance leadership</li>
         </ul>
         {%- if settings.calendly_url != blank -%}
-          <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Get Started</a>
+          <a href="{% render 'lead-url', src: scope %}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Get Started</a>
         {%- endif -%}
       </div>
     </div>

@@ -14,7 +14,7 @@
         <p class="lede">Everything your pharmacy needs to operate safely, meet regulatory requirements, and protect your license - professionally built and ready to use.</p>
         <div class="btn-row">
           {%- if settings.calendly_url != blank -%}
-            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
+            <a href="{% render 'lead-url', src: 'Pharmacy Page' %}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
           {%- endif -%}
           <a href="/pages/contact" class="btn btn--outline btn--lg">Ask a Question</a>
         </div>
@@ -105,7 +105,7 @@
     <p class="lede" style="margin-inline: auto;">We'll review your current operations, identify any gaps, and match you to the level of support that fits your pharmacy, your budget, and your goals.</p>
     <div class="btn-row" style="justify-content: center;">
       {%- if settings.calendly_url != blank -%}
-        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
+        <a href="{% render 'lead-url', src: 'Pharmacy Page' %}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Compliance Review</a>
       {%- endif -%}
       {%- if settings.contact_email != blank -%}
         <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>

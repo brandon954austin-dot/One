@@ -4,7 +4,7 @@
   Lead-funnel landing page. Assign in the Shopify admin:
   Online Store → Pages → (your landing page) → Theme template → "page.landing".
   Every CTA scrolls to the lead form; after submission the thank-you state
-  pushes the Calendly booking link. Header/footer are the stripped-down
+  pushes the lead-form link (CRM /get-started). Header/footer are the stripped-down
   "landing" layout so leads aren't distracted by site navigation.
 {%- endcomment -%}
 
@@ -144,7 +144,7 @@
               <a href="{{ 'dmepos-readiness-checklist.pdf' | asset_url }}" class="btn btn--primary btn--lg btn--full" download>Download Your Checklist (PDF)</a>
               {%- if settings.calendly_url != blank -%}
                 <div class="lp-book-divider">want a hand?</div>
-                <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Readiness Review</a>
+                <a href="{% render 'lead-url', src: 'Landing Page' %}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Readiness Review</a>
               {%- endif -%}
               {%- if settings.phone_display != blank -%}
                 <p style="margin: 1rem 0 0; font-size: 0.95rem;">Questions? Call us at <a href="tel:{{ settings.phone_tel }}"><strong>{{ settings.phone_display }}</strong></a></p>
@@ -186,7 +186,7 @@
 
             {%- if settings.calendly_url != blank -%}
               <div class="lp-book-divider">or talk to us</div>
-              <a href="{{ settings.calendly_url }}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Readiness Review</a>
+              <a href="{% render 'lead-url', src: 'Landing Page' %}" class="btn btn--outline btn--full" target="_blank" rel="noopener">Book a Free Readiness Review</a>
             {%- endif -%}
             <p class="lp-privacy-note">Instant download after you submit. Please don't include patient information (PHI). By submitting you agree to our <a href="/pages/privacy-policy">privacy policy</a>.</p>
           {%- endif -%}

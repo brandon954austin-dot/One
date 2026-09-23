@@ -52,7 +52,7 @@
         {%- if is_consult -%}
           <p>This program is custom-built for your operation, so it starts with a free consultation - not a checkout button. Fixed price, no hourly billing, printing and shipping included.</p>
           {%- if settings.calendly_url != blank -%}
-            <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Schedule a Readiness Review</a>
+            <a href="{% render 'lead-url', src: 'Product Page' %}" class="btn btn--primary btn--lg btn--full" target="_blank" rel="noopener">Schedule a Readiness Review</a>
           {%- endif -%}
           {%- if settings.phone_display != blank -%}
             <p style="margin-top: 1rem; margin-bottom: 0;">Or call <a href="tel:{{ settings.phone_tel }}">{{ settings.phone_display }}</a></p>
@@ -89,7 +89,7 @@
           <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.9rem; color: var(--ink-soft);">
             Questions before you buy?
             {%- if settings.calendly_url != blank %}
-              <a href="{{ settings.calendly_url }}" target="_blank" rel="noopener">Book a free call</a>.
+              <a href="{% render 'lead-url', src: 'Product Page' %}" target="_blank" rel="noopener">Book a free call</a>.
             {%- elsif settings.contact_email != blank %}
               <a href="mailto:{{ settings.contact_email }}">Email us</a>.
             {%- endif %}
@@ -112,7 +112,7 @@
     <p class="lede" style="margin-inline: auto;">Book a call or send a message - we'll give you a straight answer about whether it fits your situation.</p>
     <div class="btn-row" style="justify-content: center;">
       {%- if settings.calendly_url != blank -%}
-        <a href="{{ settings.calendly_url }}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
+        <a href="{% render 'lead-url', src: 'Product Page' %}" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Schedule a Readiness Review</a>
       {%- endif -%}
       {%- if settings.contact_email != blank -%}
         <a href="mailto:{{ settings.contact_email }}" class="btn btn--outline btn--lg">Email Us</a>

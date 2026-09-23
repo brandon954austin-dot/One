@@ -1,0 +1,16 @@
+{%- comment -%}
+  Single source of truth for the lead-capture link (CRM /get-started page,
+  stored in theme settings as calendly_url — id kept for back-compat).
+  Usage: href="{% render 'lead-url', src: 'DMEPOS Page' %}"
+  The optional src is recorded by the CRM as the lead's source field.
+  Handles a base URL that already carries a query string.
+{%- endcomment -%}
+{%- if src != blank and settings.calendly_url != blank -%}
+  {%- if settings.calendly_url contains '?' -%}
+    {{- settings.calendly_url -}}&src={{- src | url_param_escape -}}
+  {%- else -%}
+    {{- settings.calendly_url -}}?src={{- src | url_param_escape -}}
+  {%- endif -%}
+{%- else -%}
+  {{- settings.calendly_url -}}
+{%- endif -%}

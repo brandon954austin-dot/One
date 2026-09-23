@@ -31,8 +31,8 @@
       {
         "type": "url",
         "id": "calendly_url",
-        "label": "Booking link (Calendly)",
-        "info": "Every Book a Call button points here."
+        "label": "Lead form link",
+        "info": "Every Book a Call / Get Started button points here (the CRM's /get-started page)."
       }
     ]
   },

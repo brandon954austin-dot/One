@@ -29,7 +29,7 @@
       <a href="{{ routes.root_url }}" class="btn btn--primary">Homepage</a>
       <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline">Shop Programs</a>
       {%- if settings.calendly_url != blank -%}
-        <a href="{{ settings.calendly_url }}" class="btn btn--outline" target="_blank" rel="noopener">Book a Call</a>
+        <a href="{% render 'lead-url', src: '404 Page' %}" class="btn btn--outline" target="_blank" rel="noopener">Book a Call</a>
       {%- endif -%}
     </div>
   </div>

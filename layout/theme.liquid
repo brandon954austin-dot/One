@@ -125,7 +125,7 @@
             {%- if cart.item_count > 0 -%}<span class="cart-count">{{ cart.item_count }}</span>{%- endif -%}
           </a>
           {%- if settings.calendly_url != blank -%}
-            <a href="{{ settings.calendly_url }}" class="btn btn--primary" target="_blank" rel="noopener">Book a Call</a>
+            <a href="{% render 'lead-url', src: 'Header' %}" class="btn btn--primary" target="_blank" rel="noopener">Book a Call</a>
           {%- endif -%}
         </div>
       </nav>
@@ -162,7 +162,7 @@
               <li><a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></li>
             {%- endif -%}
             {%- if settings.calendly_url != blank -%}
-              <li><a href="{{ settings.calendly_url }}" target="_blank" rel="noopener">Book a Call</a></li>
+              <li><a href="{% render 'lead-url', src: 'Footer' %}" target="_blank" rel="noopener">Book a Call</a></li>
             {%- endif -%}
           </ul>
         </div>
