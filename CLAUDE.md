@@ -44,6 +44,6 @@ report). Key directives:
 - Brand: navy (#0b2545/#081b30), royal blue (#2f45f0), green (#2bd473);
   heart-check logo mark (see `snippets/illus-binder.liquid`, `assets/favicon.svg`).
 - Illustrations are inline SVG in brand colors - no external stock images.
-- Theme settings (phone, email, lead-form URL — the CRM /get-started page, Meta Pixel, Google Sheet
+- Theme settings (phone, email, lead-form URL - the CRM /get-started page - Meta Pixel, Google Sheet
   webhook) live in `config/settings_schema.json` under "Contact & Booking"
   and "Tracking".
