@@ -353,4 +353,56 @@
       update();
     }, { rootMargin: '0px 0px -30% 0px' }).observe(formSection);
   })();
+
+  // Relay checklist submissions to the CRM so a Lead record is created
+  // and the CRM's staff notification email goes out. Field values are
+  // stashed at submit time, then posted fire-and-forget (no-cors) once
+  // Shopify confirms the submission - guarded so a page refresh on the
+  // thank-you state can't create a duplicate lead. Only active when the
+  // lead-form theme setting points at the CRM's /get-started page.
+  {%- if settings.calendly_url contains '/get-started' -%}
+  (function () {
+    var endpoint = {{ settings.calendly_url | split: '/get-started' | first | append: '/lead/new' | json }};
+    var STORE_KEY = 'ama_lead_pending';
+    var SENT_KEY = 'ama_lead_relayed';
+    var submitted = window.location.search.indexOf('contact_posted=true') !== -1;
+    if (submitted) {
+      var raw = null;
+      try { raw = sessionStorage.getItem(STORE_KEY); } catch (e) {}
+      if (raw) {
+        try {
+          if (!sessionStorage.getItem(SENT_KEY)) {
+            var lead = JSON.parse(raw);
+            var fd = new FormData();
+            // Duplicate keys cover either naming the CRM form may use;
+            // unknown keys are ignored server-side.
+            fd.append('name', lead.name); fd.append('full_name', lead.name);
+            fd.append('email', lead.email);
+            fd.append('phone', lead.phone); fd.append('phone_number', lead.phone);
+            fd.append('message', 'Requested the DMEPOS Readiness Checklist (landing page)');
+            fd.append('src', 'Landing Page - Checklist');
+            fd.append('source', 'Landing Page - Checklist');
+            fetch(endpoint, { method: 'POST', body: fd, mode: 'no-cors', keepalive: true });
+            sessionStorage.setItem(SENT_KEY, '1');
+          }
+          sessionStorage.removeItem(STORE_KEY);
+        } catch (e) {}
+      }
+    } else {
+      var leadForm = document.querySelector('.lp-form-card form');
+      if (leadForm) {
+        leadForm.addEventListener('submit', function () {
+          try {
+            sessionStorage.removeItem(SENT_KEY);
+            sessionStorage.setItem(STORE_KEY, JSON.stringify({
+              name: (document.getElementById('lead-name') || {}).value || '',
+              email: (document.getElementById('lead-email') || {}).value || '',
+              phone: (document.getElementById('lead-phone') || {}).value || ''
+            }));
+          } catch (e) {}
+        });
+      }
+    }
+  })();
+  {%- endif -%}
 </script>
