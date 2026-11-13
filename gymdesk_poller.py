@@ -22,6 +22,7 @@ CHAT_DB_COPY = Path.home() / ".gymdesk_chat_copy.db"
 CALL_DB = Path.home() / "Library/Application Support/CallHistoryDB/CallHistoryDB.storedata"
 CALL_DB_COPY = Path.home() / ".gymdesk_call_copy.db"
 TZ = ZoneInfo("America/New_York")
+_call_db_warned = False
 
 FOLLOWUP_SCHEDULE = [
     (24 * 3600, "Hey {first_name} I know you've probably been busy, but wanted to get in touch! We can only book 2 trials per day, so it helps a ton to plan ahead. We're also raising our membership prices soon, and I'd love for you to have a chance to check us out before that happens. Were you thinking of coming in? :)"),
@@ -93,9 +94,12 @@ def has_replied(phone):
 
 def had_long_call(phone):
     """Returns True if there is any answered call >= 1 min with this number (ever)."""
+    global _call_db_warned
     try:
         if not CALL_DB.exists():
-            log.warning("Call DB not found at %s — iCloud call history may not be syncing to this Mac", CALL_DB)
+            if not _call_db_warned:
+                log.warning("Call DB not found — iCloud call history not syncing. Phone call detection disabled.")
+                _call_db_warned = True
             return False
         shutil.copy2(CALL_DB, CALL_DB_COPY)
         conn = sqlite3.connect(CALL_DB_COPY)
