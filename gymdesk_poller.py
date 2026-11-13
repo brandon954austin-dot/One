@@ -46,7 +46,7 @@ def send_imessage(phone, message):
     safe_msg = message.replace('\\', '\\\\').replace('"', '\\"')
     safe_phone = phone.replace('"', "").strip()
 
-    # Try direct send first — Messages auto-routes to iMessage or SMS (works for Android)
+    # Try direct send — Messages auto-routes to iMessage or SMS (works for Android)
     script = f'tell application "Messages" to send "{safe_msg}" to buddy "{safe_phone}"'
     result = subprocess.run(["osascript", "-e", script], capture_output=True, text=True, timeout=60)
     if result.returncode == 0:
@@ -68,12 +68,13 @@ end tell
 
     raise RuntimeError(f"Could not send to {phone}: {result.stderr.strip()}")
 
-def has_communicated(phone, first_contact_ts):
+def has_communicated(phone, first_contact_ts, automated_outgoing=None):
     """
-    Returns True if Erich has any prior communication with this number:
+    Returns True if there is any non-automated communication with this number:
     - Any incoming message ever (they texted Erich)
-    - Any outgoing message sent BEFORE this lead was detected (Erich texted them first)
-    Outgoing messages sent AFTER first_contact are the automated ones — ignored.
+    - Any outgoing message before first_contact (Erich texted them before they were a lead)
+    - More outgoing messages since first_contact than this script sent (Erich texted manually)
+      Only checked when automated_outgoing is not None (new leads tracked with after_hours_sent).
     """
     try:
         if not CHAT_DB.exists():
@@ -97,7 +98,7 @@ def has_communicated(phone, first_contact_ts):
             conn.close()
             return True
 
-        # Any outgoing message sent before this lead was first detected
+        # Any outgoing message before this lead was first detected
         cur.execute("""
             SELECT COUNT(*) FROM message m
             JOIN chat_message_join cmj ON m.ROWID = cmj.message_id
@@ -107,9 +108,27 @@ def has_communicated(phone, first_contact_ts):
             AND m.date < ?
             AND replace(replace(replace(replace(h.id, '+1', ''), '-', ''), '(', ''), ')', '') LIKE ?
         """, (apple_ts_ns, f"%{digits}",))
-        count = cur.fetchone()[0]
+        if cur.fetchone()[0] > 0:
+            conn.close()
+            return True
+
+        # If we know exactly how many automated texts went out, check for manual ones
+        if automated_outgoing is not None:
+            cur.execute("""
+                SELECT COUNT(*) FROM message m
+                JOIN chat_message_join cmj ON m.ROWID = cmj.message_id
+                JOIN chat_handle_join chj ON cmj.chat_id = chj.chat_id
+                JOIN handle h ON chj.handle_id = h.ROWID
+                WHERE m.is_from_me = 1
+                AND m.date >= ?
+                AND replace(replace(replace(replace(h.id, '+1', ''), '-', ''), '(', ''), ')', '') LIKE ?
+            """, (apple_ts_ns, f"%{digits}",))
+            outgoing_since = cur.fetchone()[0]
+            conn.close()
+            return outgoing_since > automated_outgoing
+
         conn.close()
-        return count > 0
+        return False
     except Exception as exc:
         log.warning("Could not check messages: %s", exc)
         return False
@@ -184,6 +203,7 @@ def main():
                 state[key] = {
                     "first_contact": now_ts(),
                     "followups_sent": len(FOLLOWUP_SCHEDULE),
+                    "after_hours_sent": False,
                     "phone": get_phone(row),
                     "name": get_name(row),
                     "email": get_email(row),
@@ -211,28 +231,40 @@ def main():
                 if key not in state:
                     full_name = f"{name} {last_name}".strip()
                     log.info("New lead: %s | Phone: %s | Email: %s", full_name, phone, email or "none")
-                    if is_after_hours():
-                        msg = AFTER_HOURS_MSG.format(first_name=name)
-                        try:
-                            send_imessage(phone, msg)
-                            log.info("After-hours text sent to %s at %s", name, phone)
-                        except Exception as exc:
-                            log.error("Failed to send after-hours text to %s: %s", name, exc)
-                    else:
-                        log.info("Lead %s came in during business hours - no auto text sent.", name)
+                    # Record first_contact BEFORE sending any text so automated texts
+                    # don't appear as pre-lead outgoing messages in the stop check.
                     state[key] = {
                         "first_contact": now_ts(),
                         "followups_sent": 0,
+                        "after_hours_sent": False,
                         "phone": phone,
                         "name": name,
                         "email": email,
                         "stopped": False,
                     }
                     save_state(state)
+                    if is_after_hours():
+                        msg = AFTER_HOURS_MSG.format(first_name=name)
+                        try:
+                            send_imessage(phone, msg)
+                            state[key]["after_hours_sent"] = True
+                            save_state(state)
+                            log.info("After-hours text sent to %s at %s", name, phone)
+                        except Exception as exc:
+                            log.error("Failed to send after-hours text to %s: %s", name, exc)
+                    else:
+                        log.info("Lead %s came in during business hours - no auto text sent.", name)
                     continue
 
                 if not state[key].get("stopped") and not sheet_stopped:
-                    if has_communicated(phone, state[key]["first_contact"]) or had_long_call(phone):
+                    # automated_outgoing: how many texts this script has sent to this number.
+                    # Only pass this for leads that have the after_hours_sent field (new format).
+                    # For old leads without it, skip the post-first_contact outgoing check.
+                    if "after_hours_sent" in state[key]:
+                        auto_count = state[key].get("followups_sent", 0) + (1 if state[key]["after_hours_sent"] else 0)
+                    else:
+                        auto_count = None
+                    if has_communicated(phone, state[key]["first_contact"], auto_count) or had_long_call(phone):
                         log.info("%s replied or had long call - stopping follow-ups.", name)
                         state[key]["stopped"] = True
                         save_state(state)
