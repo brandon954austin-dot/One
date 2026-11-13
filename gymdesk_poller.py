@@ -68,8 +68,13 @@ end tell
 
     raise RuntimeError(f"Could not send to {phone}: {result.stderr.strip()}")
 
-def has_replied(phone):
-    """Returns True if this number has ever sent an incoming message to Erich."""
+def has_communicated(phone, first_contact_ts):
+    """
+    Returns True if Erich has any prior communication with this number:
+    - Any incoming message ever (they texted Erich)
+    - Any outgoing message sent BEFORE this lead was detected (Erich texted them first)
+    Outgoing messages sent AFTER first_contact are the automated ones — ignored.
+    """
     try:
         if not CHAT_DB.exists():
             return False
@@ -77,6 +82,9 @@ def has_replied(phone):
         conn = sqlite3.connect(CHAT_DB_COPY)
         cur = conn.cursor()
         digits = "".join(c for c in phone if c.isdigit())[-10:]
+        apple_ts_ns = int((first_contact_ts - 978307200) * 1e9)
+
+        # Any incoming message ever
         cur.execute("""
             SELECT COUNT(*) FROM message m
             JOIN chat_message_join cmj ON m.ROWID = cmj.message_id
@@ -85,11 +93,25 @@ def has_replied(phone):
             WHERE m.is_from_me = 0
             AND replace(replace(replace(replace(h.id, '+1', ''), '-', ''), '(', ''), ')', '') LIKE ?
         """, (f"%{digits}",))
+        if cur.fetchone()[0] > 0:
+            conn.close()
+            return True
+
+        # Any outgoing message sent before this lead was first detected
+        cur.execute("""
+            SELECT COUNT(*) FROM message m
+            JOIN chat_message_join cmj ON m.ROWID = cmj.message_id
+            JOIN chat_handle_join chj ON cmj.chat_id = chj.chat_id
+            JOIN handle h ON chj.handle_id = h.ROWID
+            WHERE m.is_from_me = 1
+            AND m.date < ?
+            AND replace(replace(replace(replace(h.id, '+1', ''), '-', ''), '(', ''), ')', '') LIKE ?
+        """, (apple_ts_ns, f"%{digits}",))
         count = cur.fetchone()[0]
         conn.close()
         return count > 0
     except Exception as exc:
-        log.warning("Could not check replies: %s", exc)
+        log.warning("Could not check messages: %s", exc)
         return False
 
 def had_long_call(phone):
@@ -210,7 +232,7 @@ def main():
                     continue
 
                 if not state[key].get("stopped") and not sheet_stopped:
-                    if has_replied(phone) or had_long_call(phone):
+                    if has_communicated(phone, state[key]["first_contact"]) or had_long_call(phone):
                         log.info("%s replied or had long call - stopping follow-ups.", name)
                         state[key]["stopped"] = True
                         save_state(state)
